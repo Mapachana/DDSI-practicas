@@ -1,5 +1,9 @@
 import pyodbc
 from datetime import datetime
+
+from opcion1 import * # primera opcion del menu
+
+
 cnxn = pyodbc.connect('DRIVER={Devart ODBC Driver for Oracle};Direct=True;Host=oracle0.ugr.es;Service Name= practbd.oracle0.ugr.es;User ID=x7770080;Password=x7770080')
 
 cursor = cnxn.cursor()
