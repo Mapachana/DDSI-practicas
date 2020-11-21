@@ -1,6 +1,7 @@
 from menu_principal_1 import *
 from menu_principal_2 import *
 from menu_principal_3 import *
+from inicializar_tablas import *
 
 def menu_principal(cursor):
 	opciones_validas = range(1, 5) # 1, 2, 3, 4

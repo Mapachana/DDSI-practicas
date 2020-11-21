@@ -1,4 +1,5 @@
 def inicializar_tablas(cursor):
+	global num_pedidos
 	num_pedidos = 0
 	#cursor.execute("CREATE TABLE prueba (personid INT, cosa INT)")
 

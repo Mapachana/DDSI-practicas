@@ -4,7 +4,6 @@ from datetime import datetime
 from inicializar_tablas import * # inicialización de las tablas
 from menu_principal import * # menu principal
 
-
 # PROGRAMA PRINCIPAL
 def main():
 	# conexión con la base de datos: 
