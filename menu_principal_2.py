@@ -1,31 +1,41 @@
-import inicializar_tablas
+import config
+from inicializar_tablas import *
+from menu_principal_2_1 import *
+from menu_principal_2_2 import *
+from menu_principal_2_3 import *
+from menu_principal_2_4 import *
 from datetime import datetime
 
 def menu_principal_2(cursor):
-	print("MENÚ ALTA DE PEDIDO")
+
+	cursor.execute("SAVEPOINT INICIO_PEDIDO")
+
 	print("Por favor introduzca el codigo de cliente")
 	codigo = input()
-	pidiendo = True
-	inicializar_tablas.num_pedidos += 1
-	cursor.execute("INSERT INTO Pedido VALUES ("+str(inicializar_tablas.num_pedidos)+", "+codigo+", "+datetime.today().strftime('%Y-%m-%d')+")")
-	
-	while(pidiendo):
-		print("Pulse 1 para añadir detalle de producto,\n 2 para eliminar todos los detalles de producto,\n 3 para cancelar pedido,\n 4 para confirmar y terminar pedido\n")
-		opcion = input()
-		if opcion == "1":
-			print("jaja no lo has hecho")
-			
-		elif opcion == "2":
-			print("llora")
-			
-		elif opcion == "3":
-			print("otro menu")
-			pidiendo = false
-			
-		elif opcion == "4":
-			# Salida de esta función:
-			pidiendo = false
+	config.num_pedidos += 1
+	cursor.execute("INSERT INTO Pedido VALUES (" + str(config.num_pedidos) + ", " + codigo + ", TO_DATE(\'" + datetime.today().strftime('%Y-%m-%d') + "\', \'yyyy/mm/dd\'))")
 
+	cursor.execute("SAVEPOINT INICIO_DETALLES")
 
+	opciones_validas = range(1, 5) # 1, 2, 3, 4
+	salir = False
+	while not salir:
+		print("MENÚ ALTA DE PEDIDO:\n\tOpciones:\n\t\t1: aniadir detalle de producto\n\t\t2: eliminar todos los detalles de producto\n\t\t3: cancelar pedido\n\t\t4: finalizar pedido\n")
+		opcion = int(input())
 
+		if not opcion in opciones_validas:
+			print("Por favor introduzca una opción válida")
 
+		if opcion == 1:
+			menu_principal_2_1(cursor)
+
+		elif opcion == 2:
+			menu_principal_2_2(cursor)
+
+		elif opcion == 3:
+			menu_principal_2_3(cursor)
+			salir = True
+
+		elif opcion == 4:
+			menu_principal_2_4(cursor)
+			salir = True
