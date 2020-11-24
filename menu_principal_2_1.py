@@ -2,7 +2,7 @@ import config
 
 def menu_principal_2_1(cursor):
     print("Introduce el codigo del producto")
-    codigo_producto = input()
+    codigo_producto = str(int(input()))
 
     print("Introduce la cantidad")
     cantidad = int(input())

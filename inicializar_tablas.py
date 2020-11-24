@@ -5,10 +5,6 @@ def inicializar_tablas(cursor):
 
 	insert_list = [(1, 10), (2, 13), (3, 24), (4, 89), (5, 36), (6, 17), (7, 52), (8, 43), (9, 32), (10, 96)]
 
-	cursor.execute("DROP TABLE DetallePedido")
-	cursor.execute("DROP TABLE Pedido")
-	cursor.execute("DROP TABLE Stock")
-
 	cursor.execute("CREATE TABLE Stock (Cproducto INT PRIMARY KEY, Cantidad INT)")
 	cursor.executemany("INSERT INTO Stock (Cproducto, Cantidad) VALUES (?, ?)", insert_list)
 
@@ -28,3 +24,9 @@ def inicializar_tablas(cursor):
 			print(str(row[0]) +"\t\t" + str(row[1]))
 	else:
 		print("No hay datos en la tabla.")
+
+def reinicializar_tablas(cursor):
+	cursor.execute("DROP TABLE DetallePedido")
+	cursor.execute("DROP TABLE Pedido")
+	cursor.execute("DROP TABLE Stock")
+	inicializar_tablas(cursor)

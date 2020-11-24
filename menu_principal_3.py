@@ -1,7 +1,7 @@
 def menu_principal_3(cursor):
 	print("MENÚ BORRAR UN PEDIDO")
 	print("Por favor introduzca el codigo del pedido que desea borrar")
-	codigo = input()
+	codigo = str(int(input()))
 	q = cursor.execute("SELECT * FROM Pedido WHERE CPedido = " + codigo)
 	rows = q.fetchall()
 
@@ -11,4 +11,5 @@ def menu_principal_3(cursor):
 		cursor.execute("DELETE FROM Pedido WHERE CPedido = " + codigo)
 		cursor.execute("COMMIT")
 		print("Pedido borrado")
+		
 	return 0

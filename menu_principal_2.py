@@ -11,7 +11,7 @@ def menu_principal_2(cursor):
 	cursor.execute("SAVEPOINT INICIO_PEDIDO")
 
 	print("Por favor introduzca el codigo de cliente")
-	codigo = input()
+	codigo = str(int(input())) #Por seguridad
 	config.num_pedidos += 1
 	cursor.execute("INSERT INTO Pedido VALUES (" + str(config.num_pedidos) + ", " + codigo + ", TO_DATE(\'" + datetime.today().strftime('%Y-%m-%d') + "\', \'yyyy/mm/dd\'))")
 
