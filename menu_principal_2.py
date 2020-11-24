@@ -20,7 +20,7 @@ def menu_principal_2(cursor):
 	opciones_validas = range(1, 5) # 1, 2, 3, 4
 	salir = False
 	while not salir:
-		print("MENÚ ALTA DE PEDIDO:\n\tOpciones:\n\t\t1: aniadir detalle de producto\n\t\t2: eliminar todos los detalles de producto\n\t\t3: cancelar pedido\n\t\t4: finalizar pedido\n")
+		print("\nMENÚ ALTA DE PEDIDO:\n\tOpciones:\n\t\t1: aniadir detalle de producto\n\t\t2: eliminar todos los detalles de producto\n\t\t3: cancelar pedido\n\t\t4: finalizar pedido\n")
 		opcion = int(input())
 
 		if not opcion in opciones_validas:

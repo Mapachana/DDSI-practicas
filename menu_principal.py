@@ -10,7 +10,7 @@ def menu_principal(cursor):
 	while not salir:
 		opcion = 0
 		while not opcion in opciones_validas:
-			print("MENÚ PRINCIPAL:\n\tOpciones:\n\t\t1: reinicializar tablas\n\t\t2: dar de alta un pedido\n\t\t3: borrar un pedido\n\t\t4: salir\n")
+			print("\nMENÚ PRINCIPAL:\n\tOpciones:\n\t\t1: reinicializar tablas\n\t\t2: dar de alta un pedido\n\t\t3: borrar un pedido\n\t\t4: salir\n")
 			opcion = int(input())
 			
 			if not opcion in opciones_validas:
