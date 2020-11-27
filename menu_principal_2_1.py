@@ -17,7 +17,7 @@ def menu_principal_2_1(cursor):
     else:
         cantidadDisponible = int(respuesta[0][0])
 
-        if cantidad <= cantidadDisponible:
+        if cantidad <= cantidadDisponible and cantidad > 0:
             cursor.execute("INSERT INTO DetallePedido VALUES (" + str(config.num_pedidos) + ", " + codigo_producto + ", " + str(cantidad) + ")")
             cantidadDisponible -= cantidad
             cursor.execute("UPDATE Stock set cantidad=" + str(cantidadDisponible) + " where Cproducto=" + codigo_producto)
