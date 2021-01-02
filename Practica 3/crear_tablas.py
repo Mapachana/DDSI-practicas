@@ -1,7 +1,8 @@
 def crear_tablas(cursor):
-	# cargar la sentencia sql que crea todas las tablas
-	sentencia = open('sql/create.sql', 'r').read().replace("\n", " ")
+	# cargar las sentencias sql que crea todas las tablas
+	sentencias = open('sql/create.sql', 'r').read().split(';')
 	
 	# ejecutar la sentencia
-	cursor.execute(str(sentencia))
+	for sentencia in sentencias:
+		cursor.execute(sentencia)
 
