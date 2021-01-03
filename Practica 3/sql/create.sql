@@ -115,11 +115,5 @@ CREATE TABLE Producto(
     Cantidad INT CHECK(Cantidad >= 0) NOT NULL
 );
 
-CREATE TABLE Limpieza(
-    IdentificadorLimpieza VARCHAR2(9) PRIMARY KEY,
-    IdentificadorHabitacion INT REFERENCES Habitacion(IdentificadorHabitacion) NOT NULL,
-	DNI VARCHAR2(9) REFERENCES Empleado(DNI) NOT NULL,
-	FechaHora DATE NOT NULL,
-	UNIQUE (IdentificadorHabitacion,DNI, FechaHora)
-)
+
 
