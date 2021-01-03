@@ -1,15 +1,15 @@
-CREATE TABLE Empleado( 
-	DNI VARCHAR2(9) PRIMARY KEY, 
-	Nombre VARCHAR2(50) NOT NULL, 
-	Apellidos VARCHAR2(50) NOT NULL, 
-	Telefono CHAR(9), 
+CREATE TABLE Empleado(
+	DNI VARCHAR2(9) PRIMARY KEY,
+	Nombre VARCHAR2(50) NOT NULL,
+	Apellidos VARCHAR2(50) NOT NULL,
+	Telefono CHAR(9),
 	Puesto VARCHAR2(50) CHECK(
-		Puesto='Gerente' OR 
+		Puesto='Gerente' OR
 		Puesto='Recepcionista' OR
 		Puesto='Mantenimiento' OR
 		Puesto='Limpieza' OR
 		Puesto='Eventos'
-	) NOT NULL, 
+	) NOT NULL,
 	FechaNacimiento DATE,
 	NSeguridadSocial VARCHAR2(8) NOT NULL UNIQUE,
 	Cuenta CHAR(24)
@@ -67,7 +67,7 @@ CREATE TABLE Guia(
 	IdentificadorGuia VARCHAR2(9) PRIMARY KEY
 );
 
-CREATE TABLE Actividad(    
+CREATE TABLE Actividad(
 	IdentificadorActividad VARCHAR2(9) PRIMARY KEY,
 	Descripcion VARCHAR2(100)
 );
@@ -124,3 +124,13 @@ CREATE TABLE Limpieza(
 
 );
 
+CREATE TABLE RegistraAvisoReparacion(
+    IdentificadorReparacion VARCHAR2(9) PRIMARY KEY,
+    IdentificadorHabitacion INT REFERENCES Habitacion(IdentificadorHabitacion) NOT NULL,
+		Descripcion VARCHAR2(100),
+		Fecha DATE
+);
+
+CREATE TABLE ReparacionResuelta(
+    IdentificadorReparacion VARCHAR2(9) REFERENCES RegistraAvisoReparacion(IdentificadorReparacion) PRIMARY KEY
+);
