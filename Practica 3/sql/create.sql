@@ -117,7 +117,7 @@ CREATE TABLE Producto(
 
 CREATE TABLE Limpieza(
     IdentificadorLimpieza VARCHAR2(9) PRIMARY KEY,
-    IdentificadorHabitacion INT(3) REFERENCES Habitacion(IdentificadorHabitacion) NOT NULL,
+    IdentificadorHabitacion INT REFERENCES Habitacion(IdentificadorHabitacion) NOT NULL,
 	DNI VARCHAR2(9) REFERENCES Empleado(DNI) NOT NULL,
 	FechaHora DATE NOT NULL,
 	UNIQUE (IdentificadorHabitacion,DNI, FechaHora)
