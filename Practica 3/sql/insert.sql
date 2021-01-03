@@ -8,10 +8,10 @@ INSERT INTO EmpleadoDeBaja (DNI) VALUES ('22222222B');
 
 INSERT INTO EventoTieneLugarEn (IdentificadorEvento, IdentificadorSala, Descripcion, Precio, FechaHora) VALUES ('E00000001', 'S000000001', 'Boda', '200', TO_DATE('2020-10-02 14:00', 'YYYY-MM-DD HH:MI'));
 
-INSERT INTO Sala (IdentificadorSala) VALUES ('S000000001');
+INSERT INTO Sala (IdentificadorSala) VALUES ('S00000001');
 
-INSERT INTO Sala (IdentificadorSala) VALUES ('S000000002');
+INSERT INTO Sala (IdentificadorSala) VALUES ('S00000002');
 
-INSERT INTO Actividad (IdentificadorActividad, Descripcion) VALUES ('A000000001', 'Playa');
+INSERT INTO Actividad (IdentificadorActividad, Descripcion) VALUES ('A00000001', 'Playa');
 
 
