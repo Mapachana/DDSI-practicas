@@ -6,6 +6,5 @@ def insertar_tuplas(cursor):
 
 	print("Insertando tuplas de ejemplo...")
 	run_sql(cursor, 'sql/insert.sql')
+	cursor.execute('COMMIT')
 	print("Hecho")
-	
-	#FALTA HACER UN COMMIT
