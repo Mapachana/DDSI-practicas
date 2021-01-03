@@ -20,6 +20,8 @@ INSERT INTO GrupoDirigidoPor (IdentificadorGrupo, IdentificadorGuia, FechaHora) 
 
 INSERT INTO Realiza (IdentificadorGrupo, IdentificadorActividad) VALUES ('G00000001', 'A00000001');
 
+INSERT INTO Cliente (DNI, CorreoElectronico) VALUES ('12345678S', 'pepitojd97@go.ugr.es');
+
 INSERT INTO Integrar (IdentificadorGrupo, DNI) VALUES ('G00000001', '12345678S');
 
 
