@@ -122,5 +122,5 @@ CREATE TABLE Limpieza(
 	FechaHora DATE NOT NULL,
 	UNIQUE (IdentificadorHabitacion, DNI, FechaHora)
 
-
+);
 
