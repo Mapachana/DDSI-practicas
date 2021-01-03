@@ -14,4 +14,13 @@ INSERT INTO EventoTieneLugarEn (IdentificadorEvento, IdentificadorSala, Descripc
 
 INSERT INTO Actividad (IdentificadorActividad, Descripcion) VALUES ('A00000001', 'Playa');
 
+INSERT INTO Guia (IdentificadorGuia) VALUES ('12345679B');
+
+INSERT INTO GrupoDirigidoPor (IdentificadorGrupo, IdentificadorGuia, FechaHora) VALUES ('G00000001', '12345678B', TO_DATE('2020-12-23', 'YYYY-MM-DD'));
+
+INSERT INTO Realiza (IdentificadorGrupo, IdentificadorActividad) VALUES ('G00000001', 'A00000001');
+
+INSERT INTO Integrar (IdentificadorGrupo, DNI) VALUES ('G00000001', '12345678S');
+
+
 
