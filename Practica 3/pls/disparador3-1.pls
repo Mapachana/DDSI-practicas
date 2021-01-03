@@ -1,7 +1,9 @@
-CREATE OR REPLACE TRIGGER maximoHabitacionesDia BEFORE INSERT ON Limpieza
+CREATE OR REPLACE TRIGGER maximoHabitacionesDia BEFORE INSERT ON Limpieza FOR EACH ROW
+DECLARE
+    numlimp INTEGER;
 BEGIN
-	SELECT COUNT(*) INTO numlimp FROM Limpieza l WHERE( l.DNI = '12345689' AND l.FechaHora = 'NULL');
-	if (numlimp >= 10) THEN
-		DBMS_OUTPUT.PUT_LINE("Error, un empleado no puede limpiar tantas habitaciones en un dia\n");
-	END IF
-END
+	SELECT COUNT(*) INTO numlimp FROM Limpieza l WHERE( l.DNI = :new.DNI AND l.FechaHora = :new.FechaHora);
+	IF (numlimp >= 10) THEN
+		raise_application_error(-20600, :new.DNI || ' no puede limpìar mas de 10 habitaciones en un dia');
+	END IF;
+END;
