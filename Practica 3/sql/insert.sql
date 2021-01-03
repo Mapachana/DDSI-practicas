@@ -22,7 +22,21 @@ INSERT INTO Realiza (IdentificadorGrupo, IdentificadorActividad) VALUES ('G00000
 
 INSERT INTO Cliente (DNI, CorreoElectronico) VALUES ('12345678S', 'pepitojd97@go.ugr.es');
 
+INSERT INTO Cliente (DNI, CorreoElectronico) VALUES ('72435678S', 'rosalinda@go.ugr.es');
+
 INSERT INTO Integrar (IdentificadorGrupo, DNI) VALUES ('G00000001', '12345678S');
+
+INSERT INTO Reserva (Identificador, DNI, TipoHab, FechaEntrada, FechaSalida) VALUES ('R00000001', '12345678S', 'I', TO_DATE('2020-12-11', 'YYYY-MM-DD'), TO_DATE('2020-12-14', 'YYYY-MM-DD'));
+
+INSERT INTO Reserva (Identificador, DNI, TipoHab, FechaEntrada, FechaSalida) VALUES ('R00000002', '72435678S', 'D', TO_DATE('2020-12-13', 'YYYY-MM-DD'), TO_DATE('2020-12-17', 'YYYY-MM-DD'));
+
+INSERT INTO Reserva (Identificador, DNI, TipoHab, FechaEntrada, FechaSalida) VALUES ('R00000003', '72435678S', 'S', TO_DATE('2020-12-18', 'YYYY-MM-DD'), TO_DATE('2020-12-19', 'YYYY-MM-DD'));
+
+INSERT INTO ReservaOcupada (Identificador, IdentificadorHabitacion, FechaHoraCheckIn) VALUES ('R00000001', 101, TO_DATE('2020-12-7 09:30', 'YYYY-MM-DD HH:MI'));
+
+INSERT INTO ReservaOcupada (Identificador, IdentificadorHabitacion, FechaHoraCheckIn) VALUES ('R00000002', 102, (SELECT  CURRENT_TIMESTAMP from dual));
+
+INSERT INTO ReservaFinalizada (Identificador, FechaHoraCheckOut) VALUES ('R00000001', TO_DATE('2020-12-12 08:30', 'YYYY-MM-DD HH:MI' ));
 
 
 
