@@ -121,5 +121,5 @@ CREATE TABLE Limpieza(
 	DNI VARCHAR2(9) REFERENCES Empleado(DNI) NOT NULL,
 	FechaHora DATE NOT NULL,
 	UNIQUE (IdentificadorHabitacion,DNI, FechaHora)
-);
+)
 
