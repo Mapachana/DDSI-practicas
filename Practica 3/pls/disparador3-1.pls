@@ -1,0 +1,4 @@
+CREATE OR REPLACE TRIGGER maximoHabitaciones BEFORE INSERT ON Limpieza
+BEGIN
+		
+END
