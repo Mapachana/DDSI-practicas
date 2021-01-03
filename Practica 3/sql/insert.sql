@@ -32,11 +32,11 @@ INSERT INTO Reserva (Identificador, DNI, TipoHab, FechaEntrada, FechaSalida) VAL
 
 INSERT INTO Reserva (Identificador, DNI, TipoHab, FechaEntrada, FechaSalida) VALUES ('R00000003', '72435678S', 'S', TO_DATE('2020-12-18', 'YYYY-MM-DD'), TO_DATE('2020-12-19', 'YYYY-MM-DD'));
 
-INSERT INTO ReservaOcupada (Identificador, IdentificadorHabitacion, FechaHoraCheckIn) VALUES ('R00000001', 101, TO_DATE('2020-12-7 09:30', 'YYYY-MM-DD HH:MI'));
+INSERT INTO ReservaOcupada (Identificador, IdentificadorHabitacion, FechaHoraCheckIn) VALUES ('R00000001', 101, TO_DATE('2021-02-7 09:30', 'YYYY-MM-DD HH:MI'));
 
 INSERT INTO ReservaOcupada (Identificador, IdentificadorHabitacion, FechaHoraCheckIn) VALUES ('R00000002', 102, (SELECT  CURRENT_TIMESTAMP from dual));
 
-INSERT INTO ReservaFinalizada (Identificador, FechaHoraCheckOut) VALUES ('R00000001', TO_DATE('2020-12-12 08:30', 'YYYY-MM-DD HH:MI' ));
+INSERT INTO ReservaFinalizada (Identificador, FechaHoraCheckOut) VALUES ('R00000001', TO_DATE('2021-02-12 08:30', 'YYYY-MM-DD HH:MI' ));
 
 
 
