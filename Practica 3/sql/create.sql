@@ -2,7 +2,7 @@ CREATE TABLE Empleado(
 	DNI VARCHAR2(9) PRIMARY KEY, 
 	Nombre VARCHAR2(50) NOT NULL, 
 	Apellidos VARCHAR2(50) NOT NULL, 
-	Telefono INT, 
+	Telefono CHAR(9), 
 	Puesto VARCHAR2(50) CHECK(
 		Puesto='Gerente' OR 
 		Puesto='Recepcionista' OR
@@ -11,7 +11,8 @@ CREATE TABLE Empleado(
 		Puesto='Eventos'
 	) NOT NULL, 
 	FechaNacimiento DATE,
-	NSeguridadSocial VARCHAR2(8) NOT NULL UNIQUE, Cuenta INT
+	NSeguridadSocial VARCHAR2(8) NOT NULL UNIQUE,
+	Cuenta CHAR(24)
 );
 CREATE TABLE EmpleadoDeBaja(
     DNI VARCHAR2(9) PRIMARY KEY REFERENCES Empleado(DNI) ON DELETE CASCADE
