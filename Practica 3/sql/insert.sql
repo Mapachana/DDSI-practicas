@@ -4,5 +4,5 @@ INSERT INTO Empleado (DNI, Nombre, Apellidos, Telefono, Puesto, FechaNacimiento,
 
 INSERT INTO Empleado (DNI, Nombre, Apellidos, Telefono, Puesto, FechaNacimiento, NSeguridadSocial, Cuenta) VALUES ('33333333C', 'Manuel', 'Carrero', '633333333', 'Limpieza', TO_DATE('1965-01-10', 'YYYY-MM-DD'), '33333333', 'ES6621507418401233456365');
 
-INSERT INTO EmpleadosDeBaja (DNI) VALUES ('22222222B');
+INSERT INTO EmpleadoDeBaja (DNI) VALUES ('22222222B');
 
