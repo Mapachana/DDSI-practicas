@@ -38,19 +38,25 @@ def pedirDatos():
 
 	fechaNac = '-'.join([anioNac, mesNac, diaNac])
 	
+	nSeguridadSocial = input('Introduce el numero de la seguridad social del empleado: ')
+	
+	while len(nSeguridadSocial) != 8:
+		nSeguridadSocial = input('El numero de la seguridad social debe tener 8 digitos.\nIntroduce el numero de la seguridad social del empleado: ')
+	
 	cuenta = input('Introduce el numero de cuenta del empleado: ')
 
 	while len(cuenta) != 24:
-		cuenta = input('Introduce el numero de cuenta del empleado: ')
+		cuenta = input('El numero de cuenta debe tener 24 digitos.\nIntroduce el numero de cuenta del empleado: ')
 
-	datos = ', '.join(["'"+dni+"'", "'"+nombre+"'", "'"+apellidos+"'", "'"+telefono+"'", "'"+puesto+"'", "TO_DATE("+fechaNac+", 'YYYY-MM-DD')", "'"+cuenta+"'"])
+	datos = ("'"+dni+"'", "'"+nombre+"'", "'"+apellidos+"'", "'"+telefono+"'", "'"+puesto+"'", "TO_DATE("+fechaNac+", 'YYYY-MM-DD')", "'"+nSeguridadSocial+"'", "'"+cuenta+"'")
+	#datos = ', '.join(["'"+dni+"'", "'"+nombre+"'", "'"+apellidos+"'", "'"+telefono+"'", "'"+puesto+"'", "TO_DATE("+fechaNac+", 'YYYY-MM-DD')", "'"+cuenta+"'"])
 
 	return datos
 
 def alta_empleado(cursor):
 	datos = pedirDatos()
 	
-	cursor.execute('{CALL altaEmpleado (?, ?, ?, ?, ?, ?, ?)}', datos)
+	cursor.execute('{CALL altaEmpleado (?, ?, ?, ?, ?, ?, ?, ?)}', datos)
 
 	print("Se ha aniadido el empleado con DNI: " + datos[0])
 
