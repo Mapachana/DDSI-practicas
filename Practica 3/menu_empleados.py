@@ -1,4 +1,4 @@
-def alta_empleado(cursor):
+def pedirDatos():
 	dni = input('Introduce el DNI del empleado: ')
 
 	while len(dni) != 9:
@@ -12,7 +12,7 @@ def alta_empleado(cursor):
 	apellidos = input('Introduce los apellidos del empleado: ')
 
 	while len(apellidos) < 0 or len(apellidos) > 50:
-		nombre = input('Los apellidos deben tener entre 0 y 50 caracteres.\nIntroduce los apellidos del empleado: ')
+		apellidos = input('Los apellidos deben tener entre 0 y 50 caracteres.\nIntroduce los apellidos del empleado: ')
 	
 	telefono = input('Introduce el telefono del empleado: ')
 
@@ -37,20 +37,49 @@ def alta_empleado(cursor):
 	anioNac = input('Introduce el anio de nacimiento del empleado: ')
 
 	fechaNac = '-'.join([anioNac, mesNac, diaNac])
-	datosAlta = ', '.join(["'"+dni+"'", "'"+nombre+"'", "'"+apellidos+"'", "'"+telefono+"'", "'"+puesto+"'", "TO_DATE("+fechaNac+", 'YYYY-MM-DD')"])
 	
-	idE = cursor.callfunc('altaEmpleado', VARCHAR2(9), datosAlta)
+	cuenta = input('Introduce el numero de cuenta del empleado: ')
 
-	print("Se ha aniadido el empleado con DNI: " + idE)
+	while len(cuenta) != 24:
+		cuenta = input('Introduce el numero de cuenta del empleado: ')
+
+	datos = ', '.join(["'"+dni+"'", "'"+nombre+"'", "'"+apellidos+"'", "'"+telefono+"'", "'"+puesto+"'", "TO_DATE("+fechaNac+", 'YYYY-MM-DD')", "'"+cuenta+"'"])
+
+	return datos
+
+def alta_empleado(cursor):
+	datos = pedirDatos()
+	
+	cursor.execute('{CALL altaEmpleado (?, ?, ?, ?, ?, ?, ?)}', datos)
+
+	print("Se ha aniadido el empleado con DNI: " + datos[0])
 
 def modificar_empleado(cursor):
-	print("implementar")
+	dni = input('Introduce el DNI del empleado a modificar: ')
+
+	while len(dni) != 9:
+		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del empleado: ')
 	
+	datos = [dni]
+	datos.extend(pedirDatos())
+
+	cursor.execute('{CALL modificarEmpleado (?, ?, ?, ?, ?, ?, ?, ?)}', datos)
+
 def consultar_empleado(cursor):
-	print("implementar")
+	dni = input('Introduce el DNI del empleado a consultar: ')
+
+	while len(dni) != 9:
+		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del empleado: ')
+
+	cursor.execute('{CALL consultarEmpleado (?)}', dni)
 	
 def baja_empleado(cursor):
-	print("implementar")
+	dni = input('Introduce el DNI del empleado a dar de baja: ')
+
+	while len(dni) != 9:
+		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del empleado: ')
+
+	cursor.execute('{CALL bajaEmpleado (?)}', dni)
 
 
 def menu_empleados(cursor):

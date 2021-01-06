@@ -1,4 +1,4 @@
-FUNCTION altaEmpleado(
+CREATE OR REPLACE PROCEDURE altaEmpleado(
     dniE VARCHAR2(9),
     nombreE VARCHAR2(50),
     apellidosE VARCHAR2(50),
@@ -7,9 +7,7 @@ FUNCTION altaEmpleado(
     fechaNacimientoE DATE,
 	nSeguridadSocialE VARCHAR2(8),
 	cuentaE CHAR(24)
-) RETURN VARCHAR2(9) IS
-    dniE VARCHAR2(9);
-
+) AS
 BEGIN
     INSERT INTO Empleado (
         DNI,
@@ -30,5 +28,4 @@ BEGIN
         nSeguridadSocialE,
         cuentaE
     );
-    RETURN (dniE);
 END;
