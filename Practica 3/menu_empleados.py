@@ -49,14 +49,13 @@ def pedirDatos():
 		cuenta = input('El numero de cuenta debe tener 24 digitos.\nIntroduce el numero de cuenta del empleado: ')
 
 	datos = ("'"+dni+"'", "'"+nombre+"'", "'"+apellidos+"'", "'"+telefono+"'", "'"+puesto+"'", "TO_DATE("+fechaNac+", 'YYYY-MM-DD')", "'"+nSeguridadSocial+"'", "'"+cuenta+"'")
-	#datos = ', '.join(["'"+dni+"'", "'"+nombre+"'", "'"+apellidos+"'", "'"+telefono+"'", "'"+puesto+"'", "TO_DATE("+fechaNac+", 'YYYY-MM-DD')", "'"+cuenta+"'"])
-
+	
 	return datos
 
 def alta_empleado(cursor):
 	datos = pedirDatos()
 	
-	cursor.execute('{CALL altaEmpleado (?, ?, ?, ?, ?, ?, ?, ?)}', datos)
+	cursor.execute('{CALL alta_empleado (?, ?, ?, ?, ?, ?, ?, ?)}', datos)
 
 	print("Se ha aniadido el empleado con DNI: " + datos[0])
 
