@@ -38,4 +38,17 @@ INSERT INTO Doble (Tipo) VALUES ('D');
 
 INSERT INTO Suite (Tipo) VALUES ('S');
 
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('100','I');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('101','I');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('102','I');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('103','I');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('104','I');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('105','D');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('106','D');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('107','D');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('108','D');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('200','S');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('201','S');
+
+
 
