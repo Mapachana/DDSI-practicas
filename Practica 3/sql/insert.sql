@@ -66,5 +66,7 @@ INSERT INTO ReservaFinalizada (Identificador, FechaHoraCheckOut) VALUES ('R00000
 
 INSERT INTO ReservaCancelada (Identificador) VALUES ('R00000003');
 
+INSERT INTO RegistraAvisoReparacion (IdentificadorReparacion, Descripcion, Fecha, IdentificadorHabitacion) VALUES ('RE0000001', 'Arreglar grifo', TO_DATE('2020-12-12 11:30', 'YYYY-MM-DD HH:MI'), 101);
 
+INSERT INTO ReparacionResuelta (IdentificadorReparacion) VALUES ('RE0000001');
 
