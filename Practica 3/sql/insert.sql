@@ -50,5 +50,21 @@ INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('108','D');
 INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('200','S');
 INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('201','S');
 
+INSERT INTO Reserva (Identificador, DNI, TipoHab, FechaEntrada, FechaSalida) VALUES ('R00000001', '12345678S', 'I', TO_DATE('2021-12-11', 'YYYY-MM-DD'), TO_DATE('2021-12-14', 'YYYY-MM-DD'));
+
+INSERT INTO Reserva (Identificador, DNI, TipoHab, FechaEntrada, FechaSalida) VALUES ('R00000002', '72435678S', 'D', TO_DATE('2021-12-13', 'YYYY-MM-DD'), TO_DATE('2021-12-17', 'YYYY-MM-DD'));
+
+INSERT INTO Reserva (Identificador, DNI, TipoHab, FechaEntrada, FechaSalida) VALUES ('R00000003', '72435678S', 'S', TO_DATE('2021-12-18', 'YYYY-MM-DD'), TO_DATE('2021-12-19', 'YYYY-MM-DD'));
+
+
+INSERT INTO ReservaOcupada (Identificador, IdentificadorHabitacion, FechaHoraCheckIn) VALUES ('R00000001', 101, TO_DATE('2021-12-7 12:30', 'YYYY-MM-DD HH:MI'));
+
+INSERT INTO ReservaOcupada (Identificador, IdentificadorHabitacion, FechaHoraCheckIn) VALUES ('R00000002', 102, TO_DATE('2021-12-7 12:30', 'YYYY-MM-DD HH:MI'));
+
+
+INSERT INTO ReservaFinalizada (Identificador, FechaHoraCheckOut) VALUES ('R00000001', TO_DATE('2021-12-12 12:30', 'YYYY-MM-DD HH:MI' ));
+
+INSERT INTO ReservaCancelada (Identificador) VALUES ('R00000003');
+
 
 
