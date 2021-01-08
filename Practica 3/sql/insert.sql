@@ -26,3 +26,16 @@ INSERT INTO Cliente (DNI, CorreoElectronico) VALUES ('72435678S', 'rosalinda@go.
 
 INSERT INTO Integrar (IdentificadorGrupo, DNI) VALUES ('G00000001', '12345678S');
 
+INSERT INTO TipoDeHabitacion (Tipo) VALUES ('I');
+
+INSERT INTO TipoDeHabitacion (Tipo) VALUES ('D');
+
+INSERT INTO TipoDeHabitacion (Tipo) VALUES ('S');
+
+INSERT INTO Individual (Tipo) VALUES ('I');
+
+INSERT INTO Doble (Tipo) VALUES ('D');
+
+INSERT INTO Suite (Tipo) VALUES ('S');
+
+
