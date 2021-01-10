@@ -26,3 +26,53 @@ INSERT INTO Cliente (DNI, CorreoElectronico) VALUES ('72435678S', 'rosalinda@go.
 
 INSERT INTO Integrar (IdentificadorGrupo, DNI) VALUES ('G00000001', '12345678S');
 
+INSERT INTO TipoDeHabitacion (Tipo) VALUES ('I');
+
+INSERT INTO TipoDeHabitacion (Tipo) VALUES ('D');
+
+INSERT INTO TipoDeHabitacion (Tipo) VALUES ('S');
+
+INSERT INTO Individual (Tipo) VALUES ('I');
+
+INSERT INTO Doble (Tipo) VALUES ('D');
+
+INSERT INTO Suite (Tipo) VALUES ('S');
+
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('100','I');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('101','I');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('102','I');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('103','I');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('104','I');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('105','D');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('106','D');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('107','D');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('108','D');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('200','S');
+INSERT INTO Habitacion (IdentificadorHabitacion, Tipo) VALUES ('201','S');
+
+INSERT INTO Reserva (Identificador, DNI, TipoHab, FechaEntrada, FechaSalida) VALUES ('R00000001', '12345678S', 'I', TO_DATE('2021-12-11', 'YYYY-MM-DD'), TO_DATE('2021-12-14', 'YYYY-MM-DD'));
+
+INSERT INTO Reserva (Identificador, DNI, TipoHab, FechaEntrada, FechaSalida) VALUES ('R00000002', '72435678S', 'D', TO_DATE('2021-12-13', 'YYYY-MM-DD'), TO_DATE('2021-12-17', 'YYYY-MM-DD'));
+
+INSERT INTO Reserva (Identificador, DNI, TipoHab, FechaEntrada, FechaSalida) VALUES ('R00000003', '72435678S', 'S', TO_DATE('2021-12-18', 'YYYY-MM-DD'), TO_DATE('2021-12-19', 'YYYY-MM-DD'));
+
+
+INSERT INTO ReservaOcupada (Identificador, IdentificadorHabitacion, FechaHoraCheckIn) VALUES ('R00000001', 101, TO_DATE('2021-12-7 12:30', 'YYYY-MM-DD HH:MI'));
+
+INSERT INTO ReservaOcupada (Identificador, IdentificadorHabitacion, FechaHoraCheckIn) VALUES ('R00000002', 102, TO_DATE('2021-12-7 12:30', 'YYYY-MM-DD HH:MI'));
+
+
+INSERT INTO ReservaFinalizada (Identificador, FechaHoraCheckOut) VALUES ('R00000001', TO_DATE('2021-12-12 12:30', 'YYYY-MM-DD HH:MI' ));
+
+INSERT INTO ReservaCancelada (Identificador) VALUES ('R00000003');
+
+INSERT INTO RegistraAvisoReparacion (IdentificadorReparacion, Descripcion, Fecha, IdentificadorHabitacion) VALUES ('RE0000001', 'Arreglar grifo', TO_DATE('2020-12-12 11:30', 'YYYY-MM-DD HH:MI'), 101);
+
+INSERT INTO ReparacionResuelta (IdentificadorReparacion) VALUES ('RE0000001');
+
+INSERT INTO Limpieza (IdentificadorLimpieza, IdentificadorHabitacion, DNI, FechaHora) VALUES ('L0000001','100', '33333333C', TO_DATE('2021-12-12 10:30', 'YYYY-MM-DD HH:MI'));
+
+INSERT INTO Producto (IdentificadorProducto, cantidad) VALUES ('P00000001', 10);
+INSERT INTO Producto (IdentificadorProducto, cantidad) VALUES ('P00000002', 5);
+
+
