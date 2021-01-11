@@ -32,9 +32,12 @@ def pedirDatos():
 	mesNac = input('Introduce el mes de nacimiento del empleado: ')
 
 	while int(mesNac) <= 0 or int(mesNac) > 12:
-		mesNac = input('El mes de nacimiento debe estar comprendido entre 1 y 12.\nIntroduce el dia de nacimiento del empleado: ')
+		mesNac = input('El mes de nacimiento debe estar comprendido entre 1 y 12.\nIntroduce el mes de nacimiento del empleado: ')
 	
 	anioNac = input('Introduce el anio de nacimiento del empleado: ')
+	
+	while int(anioNac) <= 0:
+		anioNac = input('El anio de nacimiento debe ser un numero positivo.\nIntroduce  el anio de nacimiento del empleado: ')
 
 	fechaNac = '-'.join([anioNac, mesNac, diaNac])
 	
@@ -55,6 +58,7 @@ def pedirDatos():
 def alta_empleado(cursor):
 	datos = pedirDatos()
 	
+	# Creo que da error por el tipo de dato fecha
 	cursor.execute('{CALL alta_empleado (?, ?, ?, ?, ?, ?, ?, ?)}', datos)
 
 	print("Se ha aniadido el empleado con DNI: " + datos[0])
@@ -68,15 +72,19 @@ def modificar_empleado(cursor):
 	datos = [dni]
 	datos.extend(pedirDatos())
 
-	cursor.execute('{CALL modificarEmpleado (?, ?, ?, ?, ?, ?, ?, ?)}', datos)
+	# Creo que da error por el tipo de dato fecha
+	cursor.execute('{CALL modificarEmpleado (?, ?, ?, ?, ?, ?, ?, ?, ?)}', datos)
 
 def consultar_empleado(cursor):
 	dni = input('Introduce el DNI del empleado a consultar: ')
 
 	while len(dni) != 9:
 		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del empleado: ')
-
+		
+	# No imprime nada, no lo entiendo...
 	cursor.execute('{CALL consultarEmpleado (?)}', dni)
+	
+	print("Si no te ha aparecido ninguna consulta, pues lo siento pero yo tampoco se por que :(")
 	
 def baja_empleado(cursor):
 	dni = input('Introduce el DNI del empleado a dar de baja: ')
@@ -84,8 +92,8 @@ def baja_empleado(cursor):
 	while len(dni) != 9:
 		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del empleado: ')
 
-	cursor.execute('{CALL bajaEmpleado (?)}', dni)
-
+	# TO DO
+	#cursor.execute('{CALL bajaEmpleado (?)}', dni)	
 
 def menu_empleados(cursor):
 	salir = False
