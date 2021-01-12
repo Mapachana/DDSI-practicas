@@ -43,9 +43,9 @@ def reserva(cursor):
 	idReserva = 0 # como lo asignamos?
 	
 	datos = ("'"+dni+"'", "'"+tipoHabitacion+"'", "TO_DATE("+fechaE+", 'YYYY-MM-DD')", "TO_DATE("+fechaS+", 'YYYY-MM-DD')", "'"+idReserva+"'")
-# TO DO
-#cursor.execute('{CALL reserva (?, ?, ?, ?, ?)}', datos)
-#print("Se ha aniadido la reserva con identificador: " + datos[4]) # decir dentro del proceduce
+	# TO DO
+	#cursor.execute('{CALL reserva (?, ?, ?, ?, ?)}', datos)
+	#print("Se ha aniadido la reserva con identificador: " + datos[4]) # decir dentro del proceduce
 
 def checkin(cursor):
 	dni = input('Introduce el DNI del cliente: ')
@@ -78,22 +78,22 @@ def checkin(cursor):
 	idHabitacion = 0 # como los asignamos?
 	datos = ("'"+dni+"'", "TO_DATE("+fechaE+", 'YYYY-MM-DD')", "'"+idReserva+"'", "'"+idHabitacion+"'")
 
-# TO DO
-#cursor.execute('{CALL checkin (?, ?, ?, ?)}', datos)
-#print("Se ha reservado la habitacion con identificador: " + datos[3]) # decir dentro del proceduce
+	# TO DO
+	#cursor.execute('{CALL checkin (?, ?, ?, ?)}', datos)
+	#print("Se ha reservado la habitacion con identificador: " + datos[3]) # decir dentro del proceduce
 
 def checkout(cursor):
 	idHabitacion = input('Introduce el identificador de la habitacion: ')
-# TO DO
-#cursor.execute('{CALL checkout (?)}', idHabitacion)
+	# TO DO
+	#cursor.execute('{CALL checkout (?)}', idHabitacion)
 
 def cancelar_reserva(cursor):
 	idReserva = input('Introduce el identificador de la reserva: ')
 	
 	while len(idReserva) != 9:
 		idReserva = input('El identificador de la reserva debe tener una longitud de 9 caracteres.\nIntroduce el identificador de la reserva: ')
-# TO DO
-#cursor.execute('{CALL cancelar_reserva (?)}', idReserva)
+	# TO DO
+	#cursor.execute('{CALL cancelar_reserva (?)}', idReserva)
 	
 def disponibilidad(cursor):
 	idTipoH = input('Introduce el identificador de tipo de habitacion: ')
@@ -110,4 +110,47 @@ def disponibilidad(cursor):
 	
 	anio = input('Introduce el anio: ')
 	
-	while 
+	while int(anio) <= 0:
+		anio = input('El anio debe ser un numero positivo.\nIntroduce el anio: ')
+	
+	fecha = '-'.join([anio, mes, dia])
+	
+	datos = ("'"+idTipoH+"'", "TO_DATE("+fecha+", 'YYYY-MM-DD')")
+	
+	# TO DO
+	#cursor.execute('{CALL disponibilidad (?, ?)}', datos) # decir dentro del procedure cuanta disponibilidad hay
+	
+
+def menu_clientes_reservas(cursor):
+	salir = False
+	while not salir:
+		print("\nMENÚ PARA LA GESTIÓN DE CLIENTES, RESERVAS Y OCUPACIONES")
+		print("\t1: Registrar una reserva")
+		print("\t2: Registrar check-in")
+		print("\t3: Registrar check-out")
+		print("\t4: Cancelar una reserva")
+		print("\t5: Consultar la disponibilidad de un tipo de habitacion")
+		print("\tq: salir")
+		
+		opciones_validas = ['1', '2', '3', '4', '5', 'q']
+		opcion = input("Elija una opción: ")
+		while not opcion in opciones_validas:
+			opcion = input("Incorrecto. Elija una opción válida: ")
+			
+		if opcion == '1':
+			reserva(cursor)
+			
+		elif opcion == '2':
+			checkin(cursor)
+			
+		elif opcion == '3':
+			checkout(cursor)
+			
+		elif opcion == '4':
+			cancelar_reserva(cursor)
+			
+		elif opcion == '5':
+			disponibilidad(cursor)
+			
+		elif opcion == 'q':
+			salir = True
