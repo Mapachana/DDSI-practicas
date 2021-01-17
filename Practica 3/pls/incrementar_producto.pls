@@ -1,9 +1,9 @@
 CREATE OR REPLACE PROCEDURE incrementar_producto(
 	identificadorE VARCHAR2,
 	cantidadE NUMBER
-) IS
+) AS
 BEGIN
 	UPDATE Producto p
-	SET p.cantidad = p.cantidad + cantidadE
-	WHERE p.IdentificadorProducto = identificadorE
+	SET p.Cantidad = p.Cantidad + cantidadE
+	WHERE p.IdentificadorProducto = identificadorE;
 END;
