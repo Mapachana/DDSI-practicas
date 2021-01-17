@@ -1,7 +1,7 @@
 def aviso_reparacion(cursor):
 	num_hab = input("Introduzca el numero de habitacion donde se necesita una reparacion: ")
 	while len(num_hab) != 3:
-		dni = input('El número de habitación debe tener 3 caracteres.\nIntroduzca el numero de habitacion donde se necesita una reparacion: ")
+		dni = input('El numero de habitacion debe tener 3 caracteres.\nIntroduzca el numero de habitacion donde se necesita una reparacion: ")
 
 	descripcion = input("Introduzca la descripcion del problema")
 	while len(descripcion) <= 0 or len(descripcion) > 300:
