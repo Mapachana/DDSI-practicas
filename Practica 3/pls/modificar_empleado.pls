@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE modificarEmpleado(
+CREATE OR REPLACE PROCEDURE modificar_empleado(
    	dniId VARCHAR2,
    	dniE VARCHAR2,
    	nombreE VARCHAR2,
