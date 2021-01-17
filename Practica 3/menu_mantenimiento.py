@@ -93,7 +93,7 @@ def limpieza(cursor):
 	
 	identificador = "L0000004" #FIXME hay que hacer un identificador unico
 
-	datos = ["'"+identificador+"'", "'"+num_hab+"'", "'"+dni+"'", "TO_DATE('"+fechaNacaux+"', 'YYYY-MM-DD')"]
+	datos = ["'"+identificador+"'", "'"+num_hab+"'", "'"+dni+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD HH:MI')"]
 
 	sentencia = 'CALL asignar_limpieza (' + ', '.join(datos) + ')'
 	print(sentencia)
