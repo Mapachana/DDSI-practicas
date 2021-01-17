@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE registrar_aviso_reparacion(
+CREATE OR REPLACE PROCEDURE registraravisoreparacion(
     identificadorE VARCHAR2,
     identificador_habE NUMBER,
     descripcionE VARCHAR2,

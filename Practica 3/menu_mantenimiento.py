@@ -28,7 +28,7 @@ def aviso_reparacion(cursor):
 
 	datos = ("'"+identificador+"'", "'"+num_hab+"'", "'"+descripcion+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD')")
 
-	sentencia = 'CALL registrar_aviso_reparacion (' + ', '.join(datos) + ')'
+	sentencia = 'CALL registraravisoreparacion (' + ', '.join(datos) + ')'
 	cursor.execute(sentencia)
 
 	print("Se ha aniadido el aviso de reparacion con identificador: " + datos[0])
