@@ -3,7 +3,7 @@ def aviso_reparacion(cursor):
 	while len(num_hab) != 3:
 		num_hab = input('El numero de habitacion debe tener 3 digitos.\nIntroduzca el numero de habitacion donde se necesita una reparacion: ')
 
-	descripcion = input('Introduzca la descripcion del problema')
+	descripcion = input('Introduzca la descripcion del problema: ')
 	while len(descripcion) <= 0 or len(descripcion) > 300:
 		descripcion = input('La descripcion debe tener entre 1 y 300 caracteres.\nIntroduce la descripcion: ')
 
@@ -26,15 +26,29 @@ def aviso_reparacion(cursor):
 
 	identificador = "RE0000003" #FIXME arreglar generacion de identificador
 
-	datos = ("'"+identificador+"'", "'"+(int)num_hab+"'", "'"+descripcion+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD')")
+	datos = ["'"+identificador+"'", "'"+num_hab+"'", "'"+descripcion+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD')"]
 
 	sentencia = 'CALL registrar_aviso_reparacion (' + ', '.join(datos) + ')'
 	cursor.execute(sentencia)
+	cursor.commit()
 
 	print("Se ha aniadido el aviso de reparacion con identificador: " + datos[0])
 	
 def reparacion_resuelta(cursor):
-	print("impdementar")
+	identificador = input("Introduzca el identificador de la reparacion que desea marcar como resuelta: ")
+	
+	while len(identificador) != 9:
+		identificador = input("El numero de identificacion debe tener 9 caracteres.\nIntroduzca eel identificador de la reparacion que desea marcar como resuelta: ")
+		
+	datos = ["'"+identificador+"'"]
+
+	sentencia = 'CALL marcar_reparacion_resuelta (' + ', ' .join(datos) + ')'
+
+	cursor.execute(sentencia)
+	cursor.commit()
+
+	print("Se ha marcado como resuelto el aviso de reparacion con identificador: " + datos[0])
+	
 
 def limpieza(cursor):	
 	print("implementar")
