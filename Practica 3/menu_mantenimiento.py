@@ -1,9 +1,9 @@
 def aviso_reparacion(cursor):
-	num_hab = input("Introduzca el numero de habitacion donde se necesita una reparacion: ")
+	num_hab = input('Introduzca el numero de habitacion donde se necesita una reparacion: ')
 	while len(num_hab) != 3:
-		num_hab = input('El numero de habitacion debe tener 3 caracteres.\nIntroduzca el numero de habitacion donde se necesita una reparacion: ")
+		num_hab = input('El numero de habitacion debe tener 3 caracteres.\nIntroduzca el numero de habitacion donde se necesita una reparacion: ')
 
-	descripcion = input("Introduzca la descripcion del problema")
+	descripcion = input('Introduzca la descripcion del problema')
 	while len(descripcion) <= 0 or len(descripcion) > 300:
 		descripcion = input('La descripcion debe tener entre 1 y 300 caracteres.\nIntroduce la descripcion: ')
 
@@ -34,7 +34,7 @@ def aviso_reparacion(cursor):
 	print("Se ha aniadido el aviso de reparacion con identificador: " + datos[0])
 	
 def reparacion_resuelta(cursor):
-	print("implementar")
+	print("impdementar")
 
 def limpieza(cursor):	
 	print("implementar")
