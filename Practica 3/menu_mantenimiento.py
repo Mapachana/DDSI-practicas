@@ -1,5 +1,37 @@
 def aviso_reparacion(cursor):
-	print("implementar")
+	num_hab = input("Introduzca el numero de habitacion donde se necesita una reparacion: ")
+	while len(num_hab) != 3:
+		dni = input('El número de habitación debe tener 3 caracteres.\nIntroduzca el numero de habitacion donde se necesita una reparacion: ")
+
+	descripcion = input("Introduzca la descripcion del problema")
+	while len(descripcion) <= 0 or len(descripcion) > 300:
+		nombre = input('La descripcion debe tener entre 1 y 300 caracteres.\nIntroduce la descripcion: ')
+
+	diaNac = input('Introduce el dia de la incidencia: ')
+
+	while int(diaNac) <= 0 or int(diaNac) > 31:
+		diaNac = input('El dia de la incidencia debe estar comprendido entre 1 y 31.\nIntroduce el dia de nacimiento del empleado: ')
+
+	mesNac = input('Introduce el mes de la incidencia: ')
+
+	while int(mesNac) <= 0 or int(mesNac) > 12:
+		mesNac = input('El mes de debe estar comprendido entre 1 y 12.\nIntroduce el mes de la incidencia: ')
+
+	anioNac = input('Introduce el anio de la incidencia: ')
+
+	while int(anioNac) <= 0:
+		anioNac = input('El anio de debe ser un numero positivo.\nIntroduce  el anio de la incidencia: ')
+
+	fechaNac = '-'.join([anioNac, mesNac, diaNac])
+
+	identificador = "RE0000003" #FIXME arreglar generacion de identificador
+
+	datos = ("'"+identificador+"'", "'"+num_hab+"'", "'"+descripcion+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD')")
+
+	sentencia = 'CALL registrar_aviso_reparacion (' + ', '.join(datos) + ')'
+	cursor.execute(sentencia)
+
+	print("Se ha aniadido el aviso de reparacion con identificador: " + datos[0])
 	
 def reparacion_resuelta(cursor):
 	print("implementar")
