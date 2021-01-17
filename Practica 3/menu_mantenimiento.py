@@ -105,7 +105,25 @@ def limpieza(cursor):
 		
 
 def provisiones(cursor):
-	print("implementar")
+	identificador = input('Introduce el identificador del producto: ')
+
+	while len(identificador) != 9:
+		minuto = input('El identificador debe tener 9 caracteres.\nIntroduzca el identificador del producto: ')
+
+	cantidad = input('Introduce a cantidad a aniadir: ')
+
+	while int(cantidad) < 0:
+		minuto = input('La cantidad de debe ser un numero positivo.\nIntroduce  la cantidad: ')
+		
+	datos = ["'"+identificador+"'", "'"+cantidad+"'"]
+
+	sentencia = 'CALL incrementar_producto (' + ', '.join(datos) + ')'
+	print(sentencia)
+	cursor.execute(sentencia)
+	cursor.commit()
+
+	print("Se ha aniadido el aviso de reparacion con identificador: " + datos[0])
+		
 
 
 def menu_mantenimiento(cursor):
