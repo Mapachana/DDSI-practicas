@@ -1,7 +1,7 @@
 def aviso_reparacion(cursor):
 	num_hab = input('Introduzca el numero de habitacion donde se necesita una reparacion: ')
 	while len(num_hab) != 3:
-		num_hab = input('El numero de habitacion debe tener 3 caracteres.\nIntroduzca el numero de habitacion donde se necesita una reparacion: ')
+		num_hab = input('El numero de habitacion debe tener 3 digitos.\nIntroduzca el numero de habitacion donde se necesita una reparacion: ')
 
 	descripcion = input('Introduzca la descripcion del problema')
 	while len(descripcion) <= 0 or len(descripcion) > 300:
@@ -26,9 +26,9 @@ def aviso_reparacion(cursor):
 
 	identificador = "RE0000003" #FIXME arreglar generacion de identificador
 
-	datos = ("'"+identificador+"'", "'"+num_hab+"'", "'"+descripcion+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD')")
+	datos = ("'"+identificador+"'", "'"+(int)num_hab+"'", "'"+descripcion+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD')")
 
-	sentencia = 'CALL registraravisoreparacion (' + ', '.join(datos) + ')'
+	sentencia = 'CALL registrar_aviso_reparacion (' + ', '.join(datos) + ')'
 	cursor.execute(sentencia)
 
 	print("Se ha aniadido el aviso de reparacion con identificador: " + datos[0])
