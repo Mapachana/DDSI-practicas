@@ -100,7 +100,7 @@ CREATE TABLE EventoTieneLugarEn(
 	IdentificadorEvento VARCHAR2(9) PRIMARY KEY,
 	IdentificadorSala VARCHAR2(9) REFERENCES Sala(IdentificadorSala) NOT NULL,
 	Descripcion VARCHAR2(100),
-	Precio FLOAT NOT NULL CHECK(Precio > 0),
+	Precio FLOAT NOT NULL CHECK(Precio >= 0),
 	FechaHora DATE NOT NULL
 );
 

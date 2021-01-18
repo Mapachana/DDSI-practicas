@@ -2,9 +2,9 @@ def grupo_excursion(cursor):
 	# Creación del grupo con un guía asociado
 	id_grupo = input("Introduzca un identificador para el grupo: ")
 	dni_guia = input("Introduzca DNI del guía: ")
-	fecha = input("Introduzca fecha para la reunión del grupo (AAAA-MM-DD): ")
+	fecha = input("Introduzca fecha para la reunión del grupo (AAAA-MM-DD-HH24:MI): ")
 	
-	sentencia = "CALL grupo_excursion('" + id_grupo + "', '" + dni_guia + "', TO_DATE('" + fecha + "', 'YYYY-MM-DD'))"
+	sentencia = "CALL grupo_excursion('" + id_grupo + "', '" + dni_guia + "', TO_DATE('" + fecha + "', 'YYYY-MM-DD-HH24-MI'))"
 	#print(sentencia)
 	cursor.execute(sentencia)
 	print("Grupo creado")
@@ -22,10 +22,41 @@ def grupo_excursion(cursor):
 	
 	
 def organizar_evento(cursor):
-	print("implementar")
+	id_evento = input("Introduzca un identificador para evento: ")
+	id_sala = input("Introduzca identificador de la sala en la que se celebrará el evento: ")
+	descripcion = input("Introduzca una descripción: ")
+	precio = float(input("Introduzca un precio: "))
+	fecha = input("Introduzca fecha: (AAAA-MM-DD-HH24:MI): ")
 	
+	sentencia = "CALL organizar_evento('" + id_evento + "', '" + id_sala + "', '" + descripcion + "', " + str(precio) + ", TO_DATE('" + fecha + "', 'YYYY-MM-DD-HH24:MI'))"
+	#print(sentencia)
+	cursor.execute(sentencia)
+	cursor.commit()
+	
+
 def publicitar_evento(cursor):
-	print("Simulando enviar email...")
+	id_evento = input("Introduzca identificador del evento que desea publicitar: ")
+	consulta = cursor.execute("SELECT IdentificadorSala, Descripcion, Precio, FechaHora FROM EventoTieneLugarEn WHERE IdentificadorEvento='" + id_evento + "'").fetchall()
+	
+	if len(consulta) > 0 :
+		datos = consulta[0]
+		print(datos)
+		sala = datos[0]
+		descripcion = datos[1]
+		precio = datos[2]
+		fechahora = datos[3]
+		
+		mensaje = "Le invitamos a asistir al nuevo evento en el estupendo hotel Modesto\n\t\t\tDescripción: " + descripcion + "\n\t\t\tSala: " + sala + "\n\t\t\tPrecio: " + str(precio) + "\n\t\t\tFecha y hora: " + str(fechahora)
+		print("\n\tSe ha creado el siguiente mensaje:")
+		print("\n\t\t" + mensaje + "\n")
+
+		# Simulación de envío de emails
+		emails = [x[0] for x in cursor.execute('SELECT CorreoElectronico FROM Cliente').fetchall()]
+		for email in emails:
+			print("Simulando enviar el mensaje a " + email + "...")
+			
+	else :
+		print("No existe el evento con el identificador indicado")
 
 
 def menu_grupos_eventos(cursor):
