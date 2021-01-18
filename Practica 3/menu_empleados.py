@@ -64,12 +64,6 @@ def alta_empleado(cursor):
 	print("Se ha aniadido el empleado con DNI: " + datos[0])
 
 def modificar_empleado(cursor):
-	dni = input('Introduce el DNI del empleado a modificar: ')
-
-	while len(dni) != 9:
-		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del empleado: ')
-
-	datos = ["'" + dni + "'"]
 	datos.extend(pedirDatos())
 
 	sentencia = 'CALL modificar_empleado (' + ', '.join(datos) + ')'
@@ -83,18 +77,32 @@ def consultar_empleado(cursor):
 		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del empleado: ')
 
 	# No imprime nada, no lo entiendo...
-	cursor.execute('{CALL consultarEmpleado (?)}', dni)
+	#cursor.execute('{CALL consultarEmpleado (?)}', dni)
 
-	print("Si no te ha aparecido ninguna consulta, pues lo siento pero yo tampoco se por que :(")
+	#print("Si no te ha aparecido ninguna consulta, pues lo siento pero yo tampoco se por que :(")
+	
+	'''
+	q = cursor.execute("SELECT * FROM Empleado WHERE DNI = '" + dni + "' MINUS SELECT * FROM EmpleadoDeBaja;")
+	rows = q.fetchall()
+	
+	print("DNI \tNombre \tApellidos \tTelefono \tPuesto \tFechaNacimiento \tNSeguridadSocial \tCuenta")
+	
+	if rows is not None:
+		for row in rows:
+			print(str(row[0]) +"\t\t" + str(row[1]) +"\t\t" + str(row[2]) +"\t\t" + str(row[3]) +"\t\t" + str(row[4]) +"\t\t" + str(row[5]) +"\t\t" + str(row[6]) +"\t\t" + str(row[7]))
+	else:
+		print("No hay datos en la tabla.")
+	'''
+	
 
 def baja_empleado(cursor):
 	dni = input('Introduce el DNI del empleado a dar de baja: ')
 
 	while len(dni) != 9:
 		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del empleado: ')
-
-	# TO DO
-	#cursor.execute('{CALL bajaEmpleado (?)}', dni)
+	
+	sentencia = 'CALL bajaEmpleado (' + "'" + dni + "'" + ')'
+	cursor.execute(sentencia)
 
 def menu_empleados(cursor):
 	salir = False
