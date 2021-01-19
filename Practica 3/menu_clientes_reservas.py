@@ -80,7 +80,11 @@ def checkin(cursor):
 
 def checkout(cursor):
 	idHabitacion = input('Introduce el identificador de la habitacion: ')
-	# TO DO
+	#pedir fecha y hora
+
+	# TO DO:
+	#	-Buscar reserva ocupada y no finalizada con dicha hab
+	#	-Insertar idReserva y fechaYHora en ReservaFinalizada
 	#cursor.execute('{CALL checkout (?)}', idHabitacion)
 
 def cancelar_reserva(cursor):
@@ -88,7 +92,7 @@ def cancelar_reserva(cursor):
 
 	while len(idReserva) != 9:
 		idReserva = input('El identificador de la reserva debe tener una longitud de 9 caracteres.\nIntroduce el identificador de la reserva: ')
-	# TO DO
+	# TO DO: Meter idReserva en ReservaCancelada
 	#cursor.execute('{CALL cancelar_reserva (?)}', idReserva)
 
 def disponibilidad(cursor):
@@ -113,7 +117,8 @@ def disponibilidad(cursor):
 
 	datos = ("'"+idTipoH+"'", "TO_DATE("+fecha+", 'YYYY-MM-DD')")
 
-	# TO DO
+	# TO DO:
+	#	-Select count(habitaciones) de idTipoH, restar count(idReserva) con idTipoH y fechaE <= fecha <= fechaS y que no estén canceladas
 	#cursor.execute('{CALL disponibilidad (?, ?)}', datos) # decir dentro del procedure cuanta disponibilidad hay
 
 
