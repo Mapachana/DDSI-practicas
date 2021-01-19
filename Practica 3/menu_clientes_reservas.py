@@ -1,3 +1,5 @@
+from siguiente_id_tabla import *
+
 def reserva(cursor):
 	dni = input('Introduce el DNI del cliente: ')
 
@@ -40,9 +42,9 @@ def reserva(cursor):
 
 	fechaS = '-'.join([anioS, mesS, diaS])
 
-	idReserva = 1 # como lo asignamos?
+	idReserva = siguiente_id_tabla(cursor, "Reserva", "Identificador")
 
-	datos = ("'"+str(idReserva)+"'", "'"+dni+"'", "'"+tipoHabitacion+"'", "TO_DATE('"+fechaE+"', 'YYYY-MM-DD')", "TO_DATE('"+fechaS+"', 'YYYY-MM-DD')")
+	datos = ("'"+idReserva+"'", "'"+dni+"'", "'"+tipoHabitacion+"'", "TO_DATE('"+fechaE+"', 'YYYY-MM-DD')", "TO_DATE('"+fechaS+"', 'YYYY-MM-DD')")
 
 	sentencia = 'CALL reservar (' + ', '.join(datos) + ')'
 	cursor.execute(sentencia)
@@ -50,39 +52,31 @@ def reserva(cursor):
 	print("Se ha aniadido la reserva con identificador: " + datos[0]) # decir dentro del proceduce
 
 def checkin(cursor):
-	dni = input('Introduce el DNI del cliente: ') #En realidad no hace falta el DNI
-
-	while len(dni) != 9:
-		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del cliente: ')
-
-	diaE = input('Introduce el dia de entrada: ')
-
-	while int(diaE) <= 0 or int(diaE) > 31:
-		diaE = input('El dia de entrada debe estar comprendido entre 1 y 31.\nIntroduce el dia de entrada: ')
-
-	mesE = input('Introduce el mes de entrada: ')
-
-	while int(mesE) <= 0 or int(mesE) > 12:
-		mesE = input('El mes de entrada debe estar comprendido entre 1 y 12.\nIntroduce el mes de entrada: ')
-
-	anioE = input('Introduce el anio de entrada: ')
-
-	while int(anioE) <= 0:
-		anioE = input('El anio de entrada debe ser un numero positivo.\nIntroduce  el anio de entrada: ')
-
-	fechaE = '-'.join([anioE, mesE, diaE])
 
 	idReserva = input('Introduce el identificador de la reserva: ')
 
-	while len(idReserva) != 9:
-		idReserva = input('El identificador de la reserva debe tener una longitud de 9 caracteres.\nIntroduce el identificador de la reserva: ')
+	fecha = input("Introduzca fecha y hora (AAAA-MM-DD-HH24:MI): ")
 
-	datos = ("'"+dni+"'", "TO_DATE('"+fechaE+"', 'YYYY-MM-DD')", "'"+idReserva+"'")
+	elegir_habitacion = 'SELECT  IdentificadorHabitacion \
+			             FROM Habitacion h \
+			             WHERE h.Tipo=(select TipoHab from Reserva where Identificador=\''+idReserva+'\') \
+			             MINUS \
+			             (SELECT DISTINCT IdentificadorHabitacion \
+			             FROM ReservaOcupada r\
+			             WHERE r.Identificador NOT IN (SELECT Identificador FROM ReservaFinalizada)) \
+			             '
+	q = cursor.execute(elegir_habitacion).fetchall()
 
-	sentencia = 'CALL hacer_checkin (' + ', '.join(datos) + ')'
-	#cursor.execute(sentencia)
+	if(len(q)==0):
+		print("No hay habitaciones disponibles.")
+		return
 
-	#print("Se ha reservado la habitacion con identificador: " + datos[3]) # decir dentro del proceduce
+	habitacion = str(q[0][0])
+
+	sentencia = "CALL hacer_checkin ('" + idReserva + "', '" + habitacion + "', TO_DATE('" + fecha + "', 'YYYY-MM-DD-HH24-MI'))"
+	cursor.execute(sentencia)
+
+	print("Se ha asignado la habitacion con identificador: " + habitacion)
 
 def checkout(cursor):
 	idHabitacion = input('Introduce el identificador de la habitacion: ')
