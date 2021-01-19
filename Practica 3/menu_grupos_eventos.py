@@ -1,22 +1,32 @@
+from siguiente_id_tabla import *
+
 def grupo_excursion(cursor):
-	# Creación del grupo con un guía asociado
+	id = siguiente_id_tabla(cursor, "GrupoDirigidoPor", "IdentificadorGrupo")
+	print(id)
+
+	# Creación del grupo con un guía asociado:
 	id_grupo = input("Introduzca un identificador para el grupo: ")
 	dni_guia = input("Introduzca DNI del guía: ")
 	fecha = input("Introduzca fecha para la reunión del grupo (AAAA-MM-DD-HH24:MI): ")
 	
 	sentencia = "CALL grupo_excursion('" + id_grupo + "', '" + dni_guia + "', TO_DATE('" + fecha + "', 'YYYY-MM-DD-HH24-MI'))"
-	#print(sentencia)
 	cursor.execute(sentencia)
 	print("Grupo creado")
 	
-	# Añadir participantes
+	# Añadir participantes:
 	num_participantes = int(input("Introduzca número de participantes en el grupo de excursión: "))
 	for i in range(1, num_participantes+1):
 		dni = input("Introduzca DNI del cliente número " + str(i) + ": ")
 		sentencia = "CALL participante_grupo_excursion('" + id_grupo + "', '" + dni + "')"
-		#print(sentencia)
 		cursor.execute(sentencia)
 		print("Cliente añadido a grupo")
+	
+	# Añadir una actividad al grupo de excursión:
+	id_actividad = input("Creación de una actividad para el grupo. Introduzca un identificador para la actividad: ")
+	descripcion = input("Introduzca descripción de la actividad: ")
+	sentencia = "CALL actividad_grupo_exursion('" + id_grupo + "', '" + id_actividad + "', '" + descripcion + "')"
+	print(sentencia)
+	#cursor.execute(sentencia)
 	
 	cursor.commit()
 	
@@ -40,7 +50,6 @@ def publicitar_evento(cursor):
 	
 	if len(consulta) > 0 :
 		datos = consulta[0]
-		print(datos)
 		sala = datos[0]
 		descripcion = datos[1]
 		precio = datos[2]
