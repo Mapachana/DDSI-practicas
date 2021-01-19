@@ -64,36 +64,34 @@ def alta_empleado(cursor):
 	print("Se ha aniadido el empleado con DNI: " + datos[0])
 
 def modificar_empleado(cursor):
-	datos.extend(pedirDatos())
+	datos = pedirDatos()
 
 	sentencia = 'CALL modificar_empleado (' + ', '.join(datos) + ')'
 	cursor.execute(sentencia)
-
 
 def consultar_empleado(cursor):
 	dni = input('Introduce el DNI del empleado a consultar: ')
 
 	while len(dni) != 9:
 		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del empleado: ')
-
-	# No imprime nada, no lo entiendo...
-	#cursor.execute('{CALL consultarEmpleado (?)}', dni)
-
-	#print("Si no te ha aparecido ninguna consulta, pues lo siento pero yo tampoco se por que :(")
 	
-	'''
-	q = cursor.execute("SELECT * FROM Empleado WHERE DNI = '" + dni + "' MINUS SELECT * FROM EmpleadoDeBaja;")
+	# Compruebo que no esta dado de baja
+	q = cursor.execute("SELECT DNI FROM EmpleadoDeBaja WHERE DNI = '" + dni + "';")
 	rows = q.fetchall()
 	
-	print("DNI \tNombre \tApellidos \tTelefono \tPuesto \tFechaNacimiento \tNSeguridadSocial \tCuenta")
+	if len(rows) == 0: # Si no esta dado de baja
+		q = cursor.execute("SELECT * FROM Empleado WHERE DNI = '" + dni + "';")
+		rows = q.fetchall()
+		
+		print("DNI \tNombre \tApellidos \tTelefono \tPuesto \tFechaNacimiento \tNSeguridadSocial \tCuenta")
 	
-	if rows is not None:
-		for row in rows:
-			print(str(row[0]) +"\t\t" + str(row[1]) +"\t\t" + str(row[2]) +"\t\t" + str(row[3]) +"\t\t" + str(row[4]) +"\t\t" + str(row[5]) +"\t\t" + str(row[6]) +"\t\t" + str(row[7]))
-	else:
-		print("No hay datos en la tabla.")
-	'''
-	
+		if rows is not None:
+			for row in rows:
+				print(str(row[0]) +"\t\t" + str(row[1]) +"\t\t" + str(row[2]) +"\t\t" + str(row[3]) +"\t\t" + str(row[4]) +"\t\t" + str(row[5]) +"\t\t" + str(row[6]) +"\t\t" + str(row[7]))
+		else:
+			print("No hay datos en la tabla.")
+	else: # Si esta dado de baja
+		print("El empleado con DNI " + dni + " esta dado de baja")	
 
 def baja_empleado(cursor):
 	dni = input('Introduce el DNI del empleado a dar de baja: ')
@@ -101,7 +99,7 @@ def baja_empleado(cursor):
 	while len(dni) != 9:
 		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del empleado: ')
 	
-	sentencia = 'CALL bajaEmpleado (' + "'" + dni + "'" + ')'
+	sentencia = 'CALL baja_empleado (' + "'" + dni + "'" + ')'
 	cursor.execute(sentencia)
 
 def menu_empleados(cursor):

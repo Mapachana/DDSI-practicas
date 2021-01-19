@@ -7,4 +7,5 @@ BEGIN
     ) VALUES (
       	dniE
     );
+    COMMIT;
 END;

@@ -16,4 +16,5 @@ BEGIN
 	UPDATE Empleado SET FechaNacimiento = fechaNacimientoE WHERE DNI = dniId;
 	UPDATE Empleado SET NSeguridadSocial = nSeguridadSocialE WHERE DNI = dniId;
 	UPDATE Empleado SET Cuenta = cuentaE WHERE DNI = dniId;
+	COMMIT;
 END;
