@@ -1,15 +1,12 @@
 from siguiente_id_tabla import *
 
 def grupo_excursion(cursor):
-	id = siguiente_id_tabla(cursor, "GrupoDirigidoPor", "IdentificadorGrupo")
-	print(id)
-
 	# Creación del grupo con un guía asociado:
-	id_grupo = input("Introduzca un identificador para el grupo: ")
+	id_grupo = siguiente_id_tabla(cursor, "GrupoDirigidoPor", "IdentificadorGrupo") # lo calcula automatico
 	dni_guia = input("Introduzca DNI del guía: ")
 	fecha = input("Introduzca fecha para la reunión del grupo (AAAA-MM-DD-HH24:MI): ")
 	
-	sentencia = "CALL grupo_excursion('" + id_grupo + "', '" + dni_guia + "', TO_DATE('" + fecha + "', 'YYYY-MM-DD-HH24-MI'))"
+	sentencia = "CALL grupo_excursion('" + id_grupo + "', '" + dni_guia + "', TO_DATE('" + fecha + "', 'YYYY-MM-DD-HH24:MI'))"
 	cursor.execute(sentencia)
 	print("Grupo creado")
 	
@@ -22,24 +19,22 @@ def grupo_excursion(cursor):
 		print("Cliente añadido a grupo")
 	
 	# Añadir una actividad al grupo de excursión:
-	id_actividad = input("Creación de una actividad para el grupo. Introduzca un identificador para la actividad: ")
+	id_actividad = siguiente_id_tabla(cursor, "Actividad", "IdentificadorActividad")
 	descripcion = input("Introduzca descripción de la actividad: ")
-	sentencia = "CALL actividad_grupo_exursion('" + id_grupo + "', '" + id_actividad + "', '" + descripcion + "')"
-	print(sentencia)
-	#cursor.execute(sentencia)
+	sentencia = "CALL actividad_grupo_excursion('" + id_grupo + "', '" + id_actividad + "', '" + descripcion + "')"
+	cursor.execute(sentencia)
 	
 	cursor.commit()
 	
 	
 def organizar_evento(cursor):
-	id_evento = input("Introduzca un identificador para evento: ")
+	id_evento = siguiente_id_tabla(cursor, "EventoTieneLugarEn", "IdentificadorEvento")
 	id_sala = input("Introduzca identificador de la sala en la que se celebrará el evento: ")
 	descripcion = input("Introduzca una descripción: ")
 	precio = float(input("Introduzca un precio: "))
 	fecha = input("Introduzca fecha: (AAAA-MM-DD-HH24:MI): ")
 	
 	sentencia = "CALL organizar_evento('" + id_evento + "', '" + id_sala + "', '" + descripcion + "', " + str(precio) + ", TO_DATE('" + fecha + "', 'YYYY-MM-DD-HH24:MI'))"
-	#print(sentencia)
 	cursor.execute(sentencia)
 	cursor.commit()
 	
