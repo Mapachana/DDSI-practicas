@@ -118,12 +118,32 @@ def disponibilidad(cursor):
 
 	fecha = '-'.join([anio, mes, dia])
 
-	datos = ("'"+idTipoH+"'", "TO_DATE("+fecha+", 'YYYY-MM-DD')")
+	datos = ("'"+idTipoH+"'", "TO_DATE('"+fecha+"', 'YYYY-MM-DD')")
 
-	# TO DO:
-	#	-Select count(habitaciones) de idTipoH, restar count(idReserva) con idTipoH y fechaE <= fecha <= fechaS y que no estén canceladas
-	#cursor.execute('{CALL disponibilidad (?, ?)}', datos) # decir dentro del procedure cuanta disponibilidad hay
+	sentencia1 = 'SELECT COUNT(*) \
+	              FROM Habitacion \
+	              WHERE Tipo=' + datos[0] + ' \
+	             '
+	sentencia2 = 'SELECT COUNT(*) \
+	              FROM Reserva \
+	              WHERE TipoHab=' + datos[0] + '\
+	                    AND FechaEntrada <= ' + datos[1] + '\
+	                    AND FechaSalida >= ' + datos[1] + '\
+	                    AND Identificador NOT IN \
+	                    (\
+	                    SELECT Identificador FROM ReservaCancelada\
+	                    UNION\
+	                    SELECT Identificador FROM ReservaFinalizada\
+	                    )\
+	             '
+	totalHabs = cursor.execute(sentencia1).fetchall()[0][0]
+	habsOcupadas = cursor.execute(sentencia2).fetchall()[0][0]
+	habsDisponibles = int(totalHabs - habsOcupadas)
 
+	if habsDisponibles > 0:
+		print("Quedan " + str(habsDisponibles) + " habitaciones disponibles del tipo " + idTipoH + " para la fecha " + fecha)
+	else:
+		print("No quedan habitaciones disponibles del tipo " + idTipoH + " para la fecha " + fecha)
 
 def menu_clientes_reservas(cursor):
 	salir = False
