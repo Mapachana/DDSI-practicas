@@ -92,6 +92,7 @@ def cancelar_reserva(cursor):
 
 	while len(idReserva) != 9:
 		idReserva = input('El identificador de la reserva debe tener una longitud de 9 caracteres.\nIntroduce el identificador de la reserva: ')
+
 	# TO DO: Meter idReserva en ReservaCancelada
 	#cursor.execute('{CALL cancelar_reserva (?)}', idReserva)
 
