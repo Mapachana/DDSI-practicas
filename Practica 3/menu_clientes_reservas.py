@@ -21,7 +21,7 @@ def reserva(cursor):
 	anioE = input('Introduzca el año de entrada: ')
 
 	while int(anioE) <= 0:
-		anioE = input('El año de entrada debe ser un número positivo.\nIntroduzca  el anio de entrada: ')
+		anioE = input('El año de entrada debe ser un número positivo.\nIntroduzca el anio de entrada: ')
 
 	fechaE = '-'.join([anioE, mesE, diaE])
 
@@ -81,7 +81,7 @@ def checkin(cursor):
 def checkout(cursor):
 	num_hab = input('Introduzca el número de la habitación: ')
 	while len(num_hab) != 3:
-		num_hab = input('El número de habitación debe tener 3 digitos.\nIntroduzca el número de la habitación: ')
+		num_hab = input('El número de habitación debe tener 3 dígitos.\nIntroduzca el número de la habitación: ')
 
 
 	fecha = input("Introduzca fecha y hora (AAAA-MM-DD-HH24:MI): ")
@@ -124,7 +124,7 @@ def disponibilidad(cursor):
 	dia = input('Introduzca el día: ')
 
 	while int(dia) <= 0 or int(dia) > 31:
-		dia = input('El día debe estar comprendido entre 1 y 31.\nIntroduzca el dia de entrada: ')
+		dia = input('El día debe estar comprendido entre 1 y 31.\nIntroduzca el día de entrada: ')
 
 	mes = input('Introduzca el mes: ')
 
