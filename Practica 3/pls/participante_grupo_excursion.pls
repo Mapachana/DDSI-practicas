@@ -4,4 +4,5 @@ CREATE OR REPLACE PROCEDURE participante_grupo_excursion(
 ) AS
 BEGIN
   INSERT INTO Integrar (IdentificadorGrupo, DNI) VALUES (id_grupo, dni_participante);
+  COMMIT;
 END;

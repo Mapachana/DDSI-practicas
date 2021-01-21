@@ -16,4 +16,5 @@ BEGIN
 		dniE,
 		fechaE
 	);
+	COMMIT;
 END;

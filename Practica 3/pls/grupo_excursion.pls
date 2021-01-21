@@ -5,4 +5,5 @@ CREATE OR REPLACE PROCEDURE grupo_excursion(
 ) AS
 BEGIN
   INSERT INTO GrupoDirigidoPor (IdentificadorGrupo, IdentificadorGuia, FechaHora) VALUES (id_grupo, dni_guia, fecha);
+  COMMIT;
 END;

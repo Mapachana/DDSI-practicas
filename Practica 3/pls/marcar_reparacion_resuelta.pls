@@ -7,4 +7,5 @@ BEGIN
 	) VALUES (
 		identificadorE
 	);
+	COMMIT;
 END;

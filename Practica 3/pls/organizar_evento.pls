@@ -7,4 +7,5 @@ CREATE OR REPLACE PROCEDURE organizar_evento(
 ) AS
 BEGIN
   INSERT INTO EventoTieneLugarEn (IdentificadorEvento, IdentificadorSala, Descripcion, Precio, FechaHora) VALUES (id_evento, id_sala, descripcion, precio, fecha);
+  COMMIT;
 END;

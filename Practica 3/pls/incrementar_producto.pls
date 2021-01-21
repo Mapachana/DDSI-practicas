@@ -6,4 +6,5 @@ BEGIN
 	UPDATE Producto p
 	SET p.Cantidad = p.Cantidad + cantidadE
 	WHERE p.IdentificadorProducto = identificadorE;
+	COMMIT;
 END;

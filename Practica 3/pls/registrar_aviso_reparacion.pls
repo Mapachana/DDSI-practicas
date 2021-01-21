@@ -16,4 +16,5 @@ BEGIN
        	descripcionE,
        	fechaE
     );
+    COMMIT;
 END;

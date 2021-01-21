@@ -6,4 +6,5 @@ CREATE OR REPLACE PROCEDURE actividad_grupo_excursion(
 BEGIN
   INSERT INTO Actividad (IdentificadorActividad, Descripcion) VALUES (id_actividad, descripcion);
   INSERT INTO Realiza (IdentificadorGrupo, IdentificadorActividad) VALUES (id_grupo, id_actividad);
+  COMMIT;
 END;

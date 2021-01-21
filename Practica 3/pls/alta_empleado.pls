@@ -28,4 +28,5 @@ BEGIN
        	nSeguridadSocialE,
        	cuentaE
     );
+    COMMIT;
 END;
