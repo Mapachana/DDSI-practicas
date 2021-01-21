@@ -1,44 +1,44 @@
 from siguiente_id_tabla import *
 
 def reserva(cursor):
-	dni = input('Introduce el DNI del cliente: ')
+	dni = input('Introduzca el DNI del cliente: ')
 
 	while len(dni) != 9:
-		dni = input('El DNI debe tener 9 caracteres.\nIntroduce el DNI del cliente: ')
+		dni = input('El DNI debe tener 9 caracteres.\nIntroduzca el DNI del cliente: ')
 
-	tipoHabitacion = input('Introduce el tipo de habitacion que desea reservar: ')
+	tipoHabitacion = input('Introduzca el tipo de habitación que desea reservar: ')
 
-	diaE = input('Introduce el dia de entrada: ')
+	diaE = input('Introduzca el día de entrada: ')
 
 	while int(diaE) <= 0 or int(diaE) > 31:
-		diaE = input('El dia de entrada debe estar comprendido entre 1 y 31.\nIntroduce el dia de entrada: ')
+		diaE = input('El día de entrada debe estar comprendido entre 1 y 31.\nIntroduzca el día de entrada: ')
 
-	mesE = input('Introduce el mes de entrada: ')
+	mesE = input('Introduzca el mes de entrada: ')
 
 	while int(mesE) <= 0 or int(mesE) > 12:
-		mesE = input('El mes de entrada debe estar comprendido entre 1 y 12.\nIntroduce el mes de entrada: ')
+		mesE = input('El mes de entrada debe estar comprendido entre 1 y 12.\nIntroduzca el mes de entrada: ')
 
-	anioE = input('Introduce el anio de entrada: ')
+	anioE = input('Introduzca el año de entrada: ')
 
 	while int(anioE) <= 0:
-		anioE = input('El anio de entrada debe ser un numero positivo.\nIntroduce  el anio de entrada: ')
+		anioE = input('El año de entrada debe ser un número positivo.\nIntroduzca  el anio de entrada: ')
 
 	fechaE = '-'.join([anioE, mesE, diaE])
 
-	diaS = input('Introduce el dia de salida: ')
+	diaS = input('Introduzca el día de salida: ')
 
 	while int(diaS) <= 0 or int(diaS) > 31:
-		diaS = input('El dia de salida debe estar comprendido entre 1 y 31.\nIntroduce el dia de salida: ')
+		diaS = input('El día de salida debe estar comprendido entre 1 y 31.\nIntroduzca el día de salida: ')
 
-	mesS = input('Introduce el mes de salida: ')
+	mesS = input('Introduzca el mes de salida: ')
 
 	while int(mesS) <= 0 or int(mesS) > 12:
-		mesS = input('El mes de salida debe estar comprendido entre 1 y 12.\nIntroduce el mes de salida: ')
+		mesS = input('El mes de salida debe estar comprendido entre 1 y 12.\nIntroduzca el mes de salida: ')
 
-	anioS = input('Introduce el anio de salida: ')
+	anioS = input('Introduzca el año de salida: ')
 
 	while int(anioS) <= 0:
-		anioS = input('El anio de salida debe ser un numero positivo.\nIntroduce  el anio de salida: ')
+		anioS = input('El año de salida debe ser un número positivo.\nIntroduzca el año de salida: ')
 
 	fechaS = '-'.join([anioS, mesS, diaS])
 
@@ -49,11 +49,11 @@ def reserva(cursor):
 	sentencia = 'CALL reservar (' + ', '.join(datos) + ')'
 	cursor.execute(sentencia)
 
-	print("Se ha aniadido la reserva con identificador: " + datos[0]) # decir dentro del proceduce
+	print("Se ha añadido la reserva con identificador: " + datos[0])
 
 def checkin(cursor):
 
-	idReserva = input('Introduce el identificador de la reserva: ')
+	idReserva = input('Introduzca el identificador de la reserva: ')
 
 	fecha = input("Introduzca fecha y hora (AAAA-MM-DD-HH24:MI): ")
 
@@ -76,22 +76,42 @@ def checkin(cursor):
 	sentencia = "CALL hacer_checkin ('" + idReserva + "', '" + habitacion + "', TO_DATE('" + fecha + "', 'YYYY-MM-DD-HH24-MI'))"
 	cursor.execute(sentencia)
 
-	print("Se ha asignado la habitacion con identificador: " + habitacion)
+	print("Se ha asignado la habitación con identificador: " + habitacion)
 
 def checkout(cursor):
-	idHabitacion = input('Introduce el identificador de la habitacion: ')
-	#pedir fecha y hora
+	num_hab = input('Introduzca el número de la habitación: ')
+	while len(num_hab) != 3:
+		num_hab = input('El número de habitación debe tener 3 digitos.\nIntroduzca el número de la habitación: ')
 
-	# TO DO:
-	#	-Buscar reserva ocupada y no finalizada con dicha hab
-	#	-Insertar idReserva y fechaYHora en ReservaFinalizada
-	#cursor.execute('{CALL checkout (?)}', idHabitacion)
+
+	fecha = input("Introduzca fecha y hora (AAAA-MM-DD-HH24:MI): ")
+
+	obtener_id = 'SELECT Identificador \
+				 FROM ReservaOcupada \
+				 WHERE IdentificadorHabitacion='+num_hab+'\
+				 MINUS \
+				 SELECT Identificador \
+				 FROM ReservaFinalizada \
+				 '
+	q = cursor.execute(obtener_id).fetchall()
+
+	if(len(q)==0):
+		print("Número de habitación no válido.")
+		return;
+
+	idReserva = q[0][0]
+
+	sentencia = "CALL hacer_checkout ('" + idReserva + "', TO_DATE('" + fecha + "', 'YYYY-MM-DD-HH24-MI'))"
+	cursor.execute(sentencia)
+
+	print("Se ha realizado el checkout de la reserva " + idReserva);
+
 
 def cancelar_reserva(cursor):
-	idReserva = input('Introduce el identificador de la reserva: ')
+	idReserva = input('Introduzca el identificador de la reserva: ')
 
 	while len(idReserva) != 9:
-		idReserva = input('El identificador de la reserva debe tener una longitud de 9 caracteres.\nIntroduce el identificador de la reserva: ')
+		idReserva = input('El identificador de la reserva debe tener una longitud de 9 caracteres.\nIntroduzca el identificador de la reserva: ')
 
 	sentencia = "CALL cancelar_reserva ('" + idReserva + "')"
 	cursor.execute(sentencia)
@@ -99,22 +119,22 @@ def cancelar_reserva(cursor):
 	print("Reserva cancelada.")
 
 def disponibilidad(cursor):
-	idTipoH = input('Introduce el identificador de tipo de habitacion: ')
+	idTipoH = input('Introduzca el identificador de tipo de habitación: ')
 
-	dia = input('Introduce el dia: ')
+	dia = input('Introduzca el día: ')
 
 	while int(dia) <= 0 or int(dia) > 31:
-		dia = input('El dia debe estar comprendido entre 1 y 31.\nIntroduce el dia de entrada: ')
+		dia = input('El día debe estar comprendido entre 1 y 31.\nIntroduzca el dia de entrada: ')
 
-	mes = input('Introduce el mes: ')
+	mes = input('Introduzca el mes: ')
 
 	while int(mes) <= 0 or int(mes) > 12:
-		mes = input('El mes debe estar comprendido entre 1 y 12.\nIntroduce el mes: ')
+		mes = input('El mes debe estar comprendido entre 1 y 12.\nIntroduzca el mes: ')
 
-	anio = input('Introduce el anio: ')
+	anio = input('Introduzca el año: ')
 
 	while int(anio) <= 0:
-		anio = input('El anio debe ser un numero positivo.\nIntroduce el anio: ')
+		anio = input('El año debe ser un número positivo.\nIntroduzca el año: ')
 
 	fecha = '-'.join([anio, mes, dia])
 
@@ -153,7 +173,7 @@ def menu_clientes_reservas(cursor):
 		print("\t2: Registrar check-in")
 		print("\t3: Registrar check-out")
 		print("\t4: Cancelar una reserva")
-		print("\t5: Consultar la disponibilidad de un tipo de habitacion")
+		print("\t5: Consultar la disponibilidad de un tipo de habitación")
 		print("\tq: salir")
 
 		opciones_validas = ['1', '2', '3', '4', '5', 'q']
