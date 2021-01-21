@@ -66,15 +66,13 @@ INSERT INTO ReservaFinalizada (Identificador, FechaHoraCheckOut) VALUES ('R00000
 
 INSERT INTO ReservaCancelada (Identificador) VALUES ('R00000003');
 
-INSERT INTO RegistraAvisoReparacion (IdentificadorReparacion, Descripcion, Fecha, IdentificadorHabitacion) VALUES ('RE0000001', 'Arreglar grifo', TO_DATE('2020-12-12 11:30', 'YYYY-MM-DD HH:MI'), 101);
+INSERT INTO RegistraAvisoReparacion (IdentificadorReparacion, Descripcion, Fecha, IdentificadorHabitacion) VALUES ('F00000001', 'Arreglar grifo', TO_DATE('2020-12-12 11:30', 'YYYY-MM-DD HH:MI'), 101);
 
-INSERT INTO RegistraAvisoReparacion (IdentificadorReparacion, Descripcion, Fecha, IdentificadorHabitacion) VALUES ('RE0000002', 'Arreglar ducha', TO_DATE('2020-12-12 11:30', 'YYYY-MM-DD HH:MI'), 101);
+INSERT INTO RegistraAvisoReparacion (IdentificadorReparacion, Descripcion, Fecha, IdentificadorHabitacion) VALUES ('F00000002', 'Arreglar ducha', TO_DATE('2020-12-12 11:30', 'YYYY-MM-DD HH:MI'), 101);
 
-INSERT INTO ReparacionResuelta (IdentificadorReparacion) VALUES ('RE0000001');
+INSERT INTO ReparacionResuelta (IdentificadorReparacion) VALUES ('F00000001');
 
 INSERT INTO Limpieza (IdentificadorLimpieza, IdentificadorHabitacion, DNI, FechaHora) VALUES ('L0000001','100', '33333333C', TO_DATE('2021-12-12 10:30', 'YYYY-MM-DD HH:MI'));
 
 INSERT INTO Producto (IdentificadorProducto, cantidad) VALUES ('P00000001', 10);
 INSERT INTO Producto (IdentificadorProducto, cantidad) VALUES ('P00000002', 5);
-
-
