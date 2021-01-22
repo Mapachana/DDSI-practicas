@@ -1,3 +1,5 @@
+from siguiente_id_tabla import *
+
 def aviso_reparacion(cursor):
 	num_hab = input('Introduzca el número de habitación donde se necesita una reparación: ')
 	while len(num_hab) != 3:
@@ -24,8 +26,7 @@ def aviso_reparacion(cursor):
 
 	fechaNac = '-'.join([anioNac, mesNac, diaNac])
 
-	#identificador = "RE0000003" #FIXME arreglar generacion de identificador
-	identificador = siguiente_id_tabla(cursor, RegistraAvisoReparacion, IdentificadorReparacion)
+	identificador = siguiente_id_tabla(cursor, "RegistraAvisoReparacion", "IdentificadorReparacion")
 	
 	datos = ["'"+identificador+"'", "'"+num_hab+"'", "'"+descripcion+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD')"]
 
@@ -92,8 +93,9 @@ def limpieza(cursor):
 
 	print(fechaNac)
 
-	identificador = "L0000004" #FIXME hay que hacer un identificador unico
-
+	identificador = siguiente_id_tabla(cursor, "Limpieza", "IdentificadorLimpieza")
+	print(identificador)
+	 
 	datos = ["'"+identificador+"'", "'"+num_hab+"'", "'"+dni+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD HH:MI')"]
 
 	sentencia = 'CALL asignar_limpieza (' + ', '.join(datos) + ')'
@@ -109,7 +111,7 @@ def provisiones(cursor):
 	identificador = input('Introduzca el identificador del producto: ')
 
 	while len(identificador) != 9:
-		minuto = input('El identificador debe tener 9 caracteres.\nIntroduzca el identificador del producto: ')
+		identificador = input('El identificador debe tener 9 caracteres.\nIntroduzca el identificador del producto: ')
 
 	cantidad = input('Introduzca a cantidad a añadir: ')
 
