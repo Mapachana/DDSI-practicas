@@ -24,8 +24,9 @@ def aviso_reparacion(cursor):
 
 	fechaNac = '-'.join([anioNac, mesNac, diaNac])
 
-	identificador = "RE0000003" #FIXME arreglar generacion de identificador
-
+	#identificador = "RE0000003" #FIXME arreglar generacion de identificador
+	identificador = siguiente_id_tabla(cursor, RegistraAvisoReparacion, IdentificadorReparacion)
+	
 	datos = ["'"+identificador+"'", "'"+num_hab+"'", "'"+descripcion+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD')"]
 
 	sentencia = 'CALL registrar_aviso_reparacion (' + ', '.join(datos) + ')'
