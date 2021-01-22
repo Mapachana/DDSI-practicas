@@ -72,7 +72,7 @@ INSERT INTO RegistraAvisoReparacion (IdentificadorReparacion, Descripcion, Fecha
 
 INSERT INTO ReparacionResuelta (IdentificadorReparacion) VALUES ('F00000001');
 
-INSERT INTO Limpieza (IdentificadorLimpieza, IdentificadorHabitacion, DNI, FechaHora) VALUES ('L0000001','100', '33333333C', TO_DATE('2021-12-12 10:30', 'YYYY-MM-DD HH:MI'));
+INSERT INTO Limpieza (IdentificadorLimpieza, IdentificadorHabitacion, DNI, FechaHora) VALUES ('L00000001','100', '33333333C', TO_DATE('2021-12-12 10:30', 'YYYY-MM-DD HH:MI'));
 
 INSERT INTO Producto (IdentificadorProducto, cantidad) VALUES ('P00000001', 10);
 INSERT INTO Producto (IdentificadorProducto, cantidad) VALUES ('P00000002', 5);
