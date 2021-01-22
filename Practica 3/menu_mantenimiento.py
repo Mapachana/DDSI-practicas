@@ -32,7 +32,6 @@ def aviso_reparacion(cursor):
 
 	sentencia = 'CALL registrar_aviso_reparacion (' + ', '.join(datos) + ')'
 	cursor.execute(sentencia)
-	cursor.commit()
 
 	print("Se ha añadido el aviso de reparación con identificador: " + datos[0])
 
@@ -47,7 +46,6 @@ def reparacion_resuelta(cursor):
 	sentencia = 'CALL marcar_reparacion_resuelta (' + ', ' .join(datos) + ')'
 
 	cursor.execute(sentencia)
-	cursor.commit()
 
 	print("Se ha marcado como resuelto el aviso de reparación con identificador: " + datos[0])
 
@@ -58,11 +56,11 @@ def limpieza(cursor):
 	while len(dni) != 9:
 		dni = input('El DNI debe tener 9 caracteres.\nIntroduzca el DNI del empleado: ')
 
-	num_hab = input('Introduzca el número de habitación donde se necesita una reparación: ')
+	num_hab = input('Introduzca el número de habitación a limpiar: ')
 	while len(num_hab) != 3:
 		num_hab = input('El número de habitacion debe tener 3 digitos.\nIntroduzca el numero de habitación donde se necesita una reparación: ')
 
-	diaNac = input('Introduzca el día de la incidencia: ')
+	diaNac = input('Introduzca el día de la limpieza: ')
 
 	while int(diaNac) <= 0 or int(diaNac) > 31:
 		diaNac = input('El día de la limpieza debe estar comprendido entre 1 y 31.\nIntroduzca el día de limpieza: ')
@@ -79,8 +77,8 @@ def limpieza(cursor):
 
 	hora = input('Introduzca la hora de la limpieza: ')
 
-	while int(hora) < 0 or int(hora)>12:
-		hora = input('La hora debe estar entre 0 y 12.\nIntroduzca la hora de la limpieza: ')
+	while int(hora) < 0 or int(hora)>24:
+		hora = input('La hora debe estar entre 0 y 24.\nIntroduzca la hora de la limpieza: ')
 
 	minuto = input('Introduzca el minuto de la limpieza: ')
 
@@ -94,16 +92,13 @@ def limpieza(cursor):
 	print(fechaNac)
 
 	identificador = siguiente_id_tabla(cursor, "Limpieza", "IdentificadorLimpieza")
-	print(identificador)
 	 
-	datos = ["'"+identificador+"'", "'"+num_hab+"'", "'"+dni+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD HH:MI')"]
+	datos = ["'"+identificador+"'", "'"+num_hab+"'", "'"+dni+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD HH24:MI')"]
 
 	sentencia = 'CALL asignar_limpieza (' + ', '.join(datos) + ')'
-	print(sentencia)
 	cursor.execute(sentencia)
-	cursor.commit()
 
-	print("Se ha añadido el aviso de reparacion con identificador: " + datos[0])
+	print("Se ha añadido la planificación de limpieza con identificador: " + datos[0])
 
 
 
@@ -125,7 +120,7 @@ def provisiones(cursor):
 	cursor.execute(sentencia)
 	cursor.commit()
 
-	print("Se ha añadido el aviso de reparación con identificador: " + datos[0])
+	print("Se ha añadido el producto con identificador: " + datos[0])
 
 
 
