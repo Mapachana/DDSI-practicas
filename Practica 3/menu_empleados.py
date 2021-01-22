@@ -14,7 +14,7 @@ def pedirDatos():
 	while len(apellidos) < 0 or len(apellidos) > 50:
 		apellidos = input('Los apellidos deben tener entre 0 y 50 caracteres.\nIntroduzca los apellidos del empleado: ')
 
-	telefono = input('Introduzca el telefono del empleado: ')
+	telefono = input('Introduzca el teléfono del empleado: ')
 
 	while len(telefono) != 9:
 		telefono = input('El teléfono debe tener 9 caracteres.\nIntroduzca el teléfono del empleado: ')
@@ -75,22 +75,21 @@ def consultar_empleado(cursor):
 	while len(dni) != 9:
 		dni = input('El DNI debe tener 9 caracteres.\nIntroduzca el DNI del empleado: ')
 
-	# Compruebo que no esta dado de baja
+	# Compruebo que no está dado de baja
 	q = cursor.execute("SELECT DNI FROM EmpleadoDeBaja WHERE DNI = '" + dni + "';")
 	rows = q.fetchall()
 
-	if len(rows) == 0: # Si no esta dado de baja
+	if len(rows) == 0: # Si no está dado de baja
 		q = cursor.execute("SELECT * FROM Empleado WHERE DNI = '" + dni + "';")
 		rows = q.fetchall()
 
-		print("DNI \tNombre \tApellidos \tTeléfono \tPuesto \tFechaNacimiento \tNSeguridadSocial \tCuenta")
-
-		if rows is not None:
+		if len(rows) > 0:
+			print("DNI \tNombre \tApellidos \tTeléfono \tPuesto \tFechaNacimiento \tNSeguridadSocial \tCuenta")
 			for row in rows:
 				print(str(row[0]) +"\t\t" + str(row[1]) +"\t\t" + str(row[2]) +"\t\t" + str(row[3]) +"\t\t" + str(row[4]) +"\t\t" + str(row[5]) +"\t\t" + str(row[6]) +"\t\t" + str(row[7]))
 		else:
-			print("No hay datos en la tabla.")
-	else: # Si esta dado de baja
+			print("No hay ningún empleado registrado con dicho DNI")
+	else: # Si está dado de baja
 		print("El empleado con DNI " + dni + " está dado de baja")
 
 def baja_empleado(cursor):
