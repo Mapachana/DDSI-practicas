@@ -105,8 +105,8 @@ def limpieza(cursor):
 def provisiones(cursor):
 	identificador = input('Introduzca el identificador del producto: ')
 
-	while len(identificador) != 9 and identificador[0] != 'P':
-		identificador = input('El identificador debe tener 9 caracteres.\nIntroduzca el identificador del producto: ')
+	while len(identificador) != 9 or identificador[0] != 'P':
+		identificador = input('El identificador debe tener 9 caracteres y debe empezar por el caracter P.\nIntroduzca el identificador del producto: ')
 
 	cantidad = input('Introduzca la cantidad a añadir: ')
 
