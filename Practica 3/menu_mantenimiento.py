@@ -126,7 +126,7 @@ def provisiones(cursor):
 		sentencia = 'CALL incrementar_producto (' + ', '.join(datos) + ')'
 		cursor.execute(sentencia)
 
-	print("Se han incluido " + cantidad + "unidades del producto " + identificador)
+	print("Se han incluido " + cantidad + " unidades del producto " + identificador)
 
 
 def menu_mantenimiento(cursor):
