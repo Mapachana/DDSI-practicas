@@ -105,7 +105,7 @@ def limpieza(cursor):
 def provisiones(cursor):
 	identificador = input('Introduzca el identificador del producto: ')
 
-	while len(identificador) != 9:
+	while len(identificador) != 9 and identificador[0] != 'P':
 		identificador = input('El identificador debe tener 9 caracteres.\nIntroduzca el identificador del producto: ')
 
 	cantidad = input('Introduzca la cantidad a añadir: ')
@@ -115,11 +115,18 @@ def provisiones(cursor):
 
 	datos = ["'"+identificador+"'", "'"+cantidad+"'"]
 
-	sentencia = 'CALL incrementar_producto (' + ', '.join(datos) + ')'
-	cursor.execute(sentencia)
+	sentencia = "SELECT IdentificadorProducto FROM Producto WHERE IdentificadorProducto = '" + identificador + "';"
+	q = cursor.execute(sentencia)
+	rows = q.fetchall()
+
+	if len(rows) == 0: # Si no existe el producto
+		sentencia = 'CALL aniadir_producto (' + ', '.join(datos) + ')'
+		cursor.execute(sentencia)
+	else:
+		sentencia = 'CALL incrementar_producto (' + ', '.join(datos) + ')'
+		cursor.execute(sentencia)
 
 	print("Se han incluido " + cantidad + "unidades del producto " + identificador)
-
 
 
 def menu_mantenimiento(cursor):
