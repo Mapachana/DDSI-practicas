@@ -27,7 +27,7 @@ def aviso_reparacion(cursor):
 	fechaNac = '-'.join([anioNac, mesNac, diaNac])
 
 	identificador = siguiente_id_tabla(cursor, "RegistraAvisoReparacion", "IdentificadorReparacion")
-	
+
 	datos = ["'"+identificador+"'", "'"+num_hab+"'", "'"+descripcion+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD')"]
 
 	sentencia = 'CALL registrar_aviso_reparacion (' + ', '.join(datos) + ')'
@@ -92,7 +92,7 @@ def limpieza(cursor):
 	print(fechaNac)
 
 	identificador = siguiente_id_tabla(cursor, "Limpieza", "IdentificadorLimpieza")
-	 
+
 	datos = ["'"+identificador+"'", "'"+num_hab+"'", "'"+dni+"'", "TO_DATE('"+fechaNac+"', 'YYYY-MM-DD HH24:MI')"]
 
 	sentencia = 'CALL asignar_limpieza (' + ', '.join(datos) + ')'
@@ -108,19 +108,17 @@ def provisiones(cursor):
 	while len(identificador) != 9:
 		identificador = input('El identificador debe tener 9 caracteres.\nIntroduzca el identificador del producto: ')
 
-	cantidad = input('Introduzca a cantidad a añadir: ')
+	cantidad = input('Introduzca la cantidad a añadir: ')
 
 	while int(cantidad) < 0:
-		minuto = input('La cantidad debe ser un número positivo.\nIntroduzca  la cantidad: ')
+		cantidad = input('La cantidad debe ser un número positivo.\nIntroduzca  la cantidad: ')
 
 	datos = ["'"+identificador+"'", "'"+cantidad+"'"]
 
 	sentencia = 'CALL incrementar_producto (' + ', '.join(datos) + ')'
-	print(sentencia)
 	cursor.execute(sentencia)
-	cursor.commit()
 
-	print("Se ha añadido el producto con identificador: " + datos[0])
+	print("Se han incluido " + cantidad + "unidades del producto " + identificador)
 
 
 
