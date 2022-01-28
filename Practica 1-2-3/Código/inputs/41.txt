@@ -1,0 +1,15 @@
+i
+4
+1
+12345678B
+2021-03-15-09:00
+2
+12345678S
+72435678S
+"Visita al museo del queso"
+q
+c
+GRUPODIRIGIDOPOR
+c
+INTEGRAR
+q
